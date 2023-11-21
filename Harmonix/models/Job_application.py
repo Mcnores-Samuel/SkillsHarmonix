@@ -1,0 +1,43 @@
+from django.db import models
+from django.utils import timezone
+from .users import BusinessProfile
+from .users import ProfessionalProfile
+
+
+class JobApplication(models.Model):
+    """Job application model.
+    This model is used to store job applications.
+    The job application model is linked to the business profile model and the
+    professional profile model.
+    This allows us to easily retrieve the business profile and the professional
+    profile of a job application.
+
+    Attributes:
+        date: The date the job application was submitted.
+        applicant: The professional profile that submitted the job application.
+        job: The business profile that posted the job listing.
+        first_name: The first name of the applicant.
+        last_name: The last name of the applicant.
+        address: The address of the applicant.
+        city: The city of the applicant.
+        state: The state of the applicant.
+        resume: The resume of the applicant.
+        cover_letter: The cover letter of the applicant.
+        phone: The phone number of the applicant.
+        email: The email address of the applicant.
+    """
+    date = models.DateTimeField(default=timezone.now)
+    applicant = models.ForeignKey(ProfessionalProfile, on_delete=models.CASCADE)
+    job = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    resume = models.FileField(upload_to='Professional/resumes/')
+    cover_letter = models.CharField(max_length=255)
+    phone = models.CharField(max_length=50)
+    email = models.CharField(max_length=100)
+
+    class Meta:
+        app_label = 'Harmonix'
