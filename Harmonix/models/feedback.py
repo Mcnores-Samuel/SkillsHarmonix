@@ -32,7 +32,7 @@ class Feedback(models.Model):
     date = models.DateTimeField(default=timezone.now)
     first_name = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
-    type = models.CharField(max_length=20, choices=TYPE)
+    feedback_type = models.CharField(max_length=20, choices=TYPE)
     message = models.CharField(max_length=255)
     priority = models.IntegerField(default=0)
 
