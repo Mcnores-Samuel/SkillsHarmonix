@@ -1,7 +1,10 @@
+"""This module contains the job application model
+allowing users to submit job applications.
+"""
 from django.db import models
 from django.utils import timezone
-from .users import BusinessProfile
-from .users import ProfessionalProfile
+from .business_profile import BusinessProfile
+from .professional_profile import ProfessionalProfile
 
 
 class JobApplication(models.Model):

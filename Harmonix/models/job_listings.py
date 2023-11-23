@@ -1,4 +1,7 @@
-from .users import BusinessProfile
+"""This module contains the job listing model
+allowing businesses to post job listings.
+"""
+from .business_profile import BusinessProfile
 from django.db import models
 from django.utils import timezone
 

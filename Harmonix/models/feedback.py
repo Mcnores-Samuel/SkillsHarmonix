@@ -1,6 +1,9 @@
+"""This module contains the feedback model
+allowing users to submit feedback.
+"""
 from django.db import models
 from django.utils import timezone
-from .users import User
+from .users import HarmonixUser
 
 
 TYPE = (
@@ -25,7 +28,7 @@ class Feedback(models.Model):
         message: The message of the feedback.
         priority: The priority of the feedback.
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
     first_name = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
