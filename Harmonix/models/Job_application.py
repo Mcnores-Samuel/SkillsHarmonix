@@ -29,7 +29,7 @@ class JobApplication(models.Model):
         phone: The phone number of the applicant.
         email: The email address of the applicant.
     """
-    date = models.DateTimeField(default=timezone.now)
+    date_submitted = models.DateTimeField(default=timezone.now)
     applicant = models.ForeignKey(ProfessionalProfile, on_delete=models.CASCADE)
     job = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
@@ -38,7 +38,7 @@ class JobApplication(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     resume = models.FileField(upload_to='Professional/resumes/')
-    cover_letter = models.CharField(max_length=255)
+    cover_letter = models.TextField()
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
 

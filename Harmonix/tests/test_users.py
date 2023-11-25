@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from django.test import TestCase
-from .models.users import HarmonixUser
+from Harmonix.models.users import HarmonixUser
 
 class TestUser(TestCase):
     """Test user model.

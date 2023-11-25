@@ -8,5 +8,4 @@ class BusinessProfileAdmin(admin.ModelAdmin):
     """
     list_display = ('representative', 'business_name', 'address', 'city', 'state',
                     'zipcode', 'phone', 'email')
-    list_filter = ('representative', 'business_name', 'address', 'city', 'state')
     search_fields = ('representative', 'business_name', 'address', 'city', 'state')

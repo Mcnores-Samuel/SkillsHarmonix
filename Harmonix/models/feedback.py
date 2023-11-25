@@ -28,12 +28,13 @@ class Feedback(models.Model):
         message: The message of the feedback.
         priority: The priority of the feedback.
     """
-    user = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE,
+                             null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
     first_name = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
     feedback_type = models.CharField(max_length=20, choices=TYPE)
-    message = models.CharField(max_length=255)
+    message = models.TextField()
     priority = models.IntegerField(default=0)
 
     class Meta:

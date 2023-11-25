@@ -31,14 +31,14 @@ class JobListing(models.Model):
     deadline = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
-    requirements = models.CharField(max_length=255)
-    benefits = models.CharField(max_length=255)
+    description = models.TextField()
+    requirements = models.TextField()
+    benefits = models.TextField()
     salary = models.CharField(max_length=50)
     location = models.CharField(max_length=100)
     category = models.CharField(max_length=50)
     contacts = models.CharField(max_length=255)
-    How_to_apply = models.CharField(max_length=255)
+    How_to_apply = models.TextField()
 
     class Meta:
         app_label = 'Harmonix'

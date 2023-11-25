@@ -38,8 +38,8 @@ class BusinessProfile(models.Model):
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
     website = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
-    history = models.CharField(max_length=255)
+    description = models.TextField()
+    history = models.TextField()
     verified = models.BooleanField(default=False)
     logo = models.ImageField(upload_to='Business/logos/',
                              null=True, blank=True)

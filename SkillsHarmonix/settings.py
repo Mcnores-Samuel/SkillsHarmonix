@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Harmonix',
+    'django_email_verification',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,26 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "Harmonix.HarmonixUser"
+
+def verified_callback(user):
+    user.is_active = True
+
+EMAIL_MAIL_CALLBACK = verified_callback
+
+EMAIL_VERIFIED_CALLBACK = verified_callback
+EMAIL_FROM_ADDRESS = os.environ.get('EMAIL_FROM_ADDRESS')
+EMAIL_MAIL_SUBJECT = 'Confirm your email {{ user.username }}'
+EMAIL_MAIL_HTML = 'authentication/activation_email.html'
+EMAIL_MAIL_PLAIN = 'authentication/activation_email.txt'
+EMAIL_MAIL_TOKEN_LIFE = 60 * 60
+EMAIL_MAIL_PAGE_TEMPLATE = 'comfirm_template.html'
+EMAIL_PAGE_DOMAIN = os.environ.get('EMAIL_PAGE_DOMAIN')
+EMAIL_MULTI_USER = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
