@@ -4,6 +4,7 @@ which is used to registe-r a new user to the site.
 from ...forms.sign_up_form import SignUpForm
 from django.shortcuts import render
 from django_email_verification import send_email
+from django.contrib import messages
 
 
 def sign_up(request):
@@ -22,10 +23,12 @@ def sign_up(request):
             user.is_active = False
             send_email(user)
             user.save()
+            messages.success(request, 'Account created successfully')
             return render(request, 'registers/confirm_email.html', {'user': user})
         else:
-            err = form.errors.as_data()
-            return render(request, 'registers/sign_up.html', {'form': form, 'err': err})
+            messages.error(request, 'Account creation failed')
+            messages.error(request, form.errors)
+            return render(request, 'registers/sign_up.html', {'form': form})
     else:
         form = SignUpForm()
         return render(request, 'registers/sign_up.html', {'form': form})

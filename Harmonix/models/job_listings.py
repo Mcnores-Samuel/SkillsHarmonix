@@ -35,7 +35,7 @@ class JobListing(models.Model):
     requirements = models.TextField()
     benefits = models.TextField()
     salary = models.CharField(max_length=50)
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=255)
     category = models.CharField(max_length=50)
     contacts = models.CharField(max_length=255)
     How_to_apply = models.TextField()

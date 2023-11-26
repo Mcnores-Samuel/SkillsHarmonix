@@ -40,6 +40,7 @@ class ProfessionalProfile(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
+    country = models.CharField(max_length=50, null=True, blank=True)
     zipcode = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
@@ -50,7 +51,7 @@ class ProfessionalProfile(models.Model):
     resume = models.FileField(upload_to='Professional/resumes/',
                               null=True, blank=True)
     portfolio = models.CharField(max_length=255)
-    preferences = models.CharField(max_length=255)
+    preferences = models.TextField()
     verified = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='Professional/avatars/',
                                null=True, blank=True)

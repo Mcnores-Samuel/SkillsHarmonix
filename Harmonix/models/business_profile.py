@@ -31,9 +31,11 @@ class BusinessProfile(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     representative = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=100)
+    category = models.CharField(max_length=255, default='Other')
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
+    country = models.CharField(max_length=50, null=True, blank=True)
     zipcode = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
@@ -41,6 +43,9 @@ class BusinessProfile(models.Model):
     description = models.TextField()
     history = models.TextField()
     verified = models.BooleanField(default=False)
+    registration_number = models.CharField(max_length=100, null=True, blank=True)
+    business_certificate = models.FileField(upload_to='Business/certificates/',
+                                                null=True, blank=True)
     logo = models.ImageField(upload_to='Business/logos/',
                              null=True, blank=True)
     cover_photo = models.ImageField(upload_to='Business/cover_photos/',
