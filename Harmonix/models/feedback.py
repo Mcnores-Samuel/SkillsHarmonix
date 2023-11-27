@@ -31,7 +31,7 @@ class Feedback(models.Model):
     user = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE,
                              null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
-    first_name = models.CharField(max_length=50)
+    user_name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     feedback_type = models.CharField(max_length=20, choices=TYPE)
     message = models.TextField()

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def sign_out(request):
+def log_out(request):
     """The `sign_out` view function is responsible for handling user sign-out.
     """
     logout(request)

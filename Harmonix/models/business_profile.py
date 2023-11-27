@@ -43,9 +43,10 @@ class BusinessProfile(models.Model):
     description = models.TextField()
     history = models.TextField()
     verified = models.BooleanField(default=False)
-    registration_number = models.CharField(max_length=100, null=True, blank=True)
+    registration_number = models.CharField(max_length=100,
+                                           null=True, blank=True)
     business_certificate = models.FileField(upload_to='Business/certificates/',
-                                                null=True, blank=True)
+                                            null=True, blank=True)
     logo = models.ImageField(upload_to='Business/logos/',
                              null=True, blank=True)
     cover_photo = models.ImageField(upload_to='Business/cover_photos/',
