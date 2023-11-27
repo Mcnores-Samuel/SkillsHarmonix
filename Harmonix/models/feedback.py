@@ -14,6 +14,7 @@ TYPE = (
     ("other", "other")
 )
 
+
 class Feedback(models.Model):
     """Feedback model.
     This model is used to store feedback.
@@ -31,7 +32,8 @@ class Feedback(models.Model):
     user = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE,
                              null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
-    user_name = models.CharField(max_length=100)
+    user_name = models.CharField(max_length=100,
+                                 null=True, blank=True)
     email = models.CharField(max_length=100)
     feedback_type = models.CharField(max_length=20, choices=TYPE)
     message = models.TextField()

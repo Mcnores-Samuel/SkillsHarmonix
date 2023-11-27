@@ -26,7 +26,8 @@ class JobListing(models.Model):
         contacts: The contacts of the job listing.
         How_to_apply: How to apply to the job listing.
     """
-    company = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
+    company = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE,
+                                null=True, blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     deadline = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=100)

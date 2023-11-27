@@ -6,5 +6,5 @@ from django.contrib import admin
 
 
 class JobListingAdmin(admin.ModelAdmin):
-    list_display = ('business', 'title', 'location', 'date_posted', 'deadline')
-    search_fields = ('business', 'title', 'location', 'category')
+    list_display = ('company', 'title', 'location', 'date_posted', 'deadline')
+    search_fields = ('company', 'title', 'location', 'category')
