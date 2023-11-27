@@ -17,3 +17,7 @@ class TestBusinessProfile(TestCase):
                                  password="password",
                                  user_type="Job seeker")
         
+    def test_business_profile_creation(self):
+        """This method tests the creation of a business profile."""
+        user = HarmonixUser.objects.get(email="mcnoressamuel@gmail.com")
+        

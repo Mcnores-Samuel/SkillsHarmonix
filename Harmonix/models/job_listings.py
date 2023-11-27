@@ -26,19 +26,21 @@ class JobListing(models.Model):
         contacts: The contacts of the job listing.
         How_to_apply: How to apply to the job listing.
     """
-    business = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
+    company = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     deadline = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     description = models.TextField()
-    requirements = models.TextField()
+    roles = models.TextField()
     benefits = models.TextField()
+    qualifications = models.TextField()
     salary = models.CharField(max_length=50)
     location = models.CharField(max_length=255)
     category = models.CharField(max_length=50)
     contacts = models.CharField(max_length=255)
     How_to_apply = models.TextField()
+    cautions = models.TextField()
 
     class Meta:
         app_label = 'Harmonix'
