@@ -2,10 +2,10 @@
 These urls are used to navigate to the different pages in the Harmonix app.
 """
 from django.urls import path
-from .views.registers import (sign_up, log_in, log_out,
+from Harmonix.views.registers import (sign_up, log_in, log_out,
                               create_business_profile,
                               create_professional_profile,
-                              create_job_post)
+                              create_job_post, create_feedback)
 
 
 urlpatterns = [
@@ -21,4 +21,6 @@ urlpatterns = [
          name='create_professional_profile'),
      path('create_job_post/', create_job_post.create_job_post,
           name='create_job_post'),
+     path('create_feedback/', create_feedback.create_feedback,
+          name='create_feedback'),
 ]

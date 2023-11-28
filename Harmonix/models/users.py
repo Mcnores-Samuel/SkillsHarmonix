@@ -7,7 +7,6 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
 
 
-
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
     def create_user(self, email, password=None, **extra_fields):
@@ -60,16 +59,17 @@ class HarmonixUser(AbstractUser):
         user_type: The user's type. Either "Business owner" or "Job seeker".
     """
     USER_TYPE = (
-    ("default", "default"),
-    ("Business owner", "Business owner"),
-    ("Job seeker", "Job seeker"),
-    ("Admin", "Admin"),
+        ("default", "default"),
+        ("Business owner", "Business owner"),
+        ("Job seeker", "Job seeker"),
+        ("Admin", "Admin"),
     )
     email = models.EmailField(max_length=50, unique=True)
     username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
-    user_type = models.CharField(max_length=25, choices=USER_TYPE, default='default')
+    user_type = models.CharField(max_length=25,
+                                 choices=USER_TYPE, default='default')
     image = models.ImageField(upload_to='User/images/', null=True, blank=True)
 
     objects = UserProfileManager()

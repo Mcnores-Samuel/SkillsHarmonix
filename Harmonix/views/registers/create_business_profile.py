@@ -1,4 +1,4 @@
-from ...forms.business_profile_form import BusinessProfileForm
+from Harmonix.forms.business_profile_form import BusinessProfileForm
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages

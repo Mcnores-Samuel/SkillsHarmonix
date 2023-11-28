@@ -1,4 +1,4 @@
-from ...forms.professional_profile_form import ProfessionalProfileForm
+from Harmonix.forms.professional_profile_form import ProfessionalProfileForm
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages

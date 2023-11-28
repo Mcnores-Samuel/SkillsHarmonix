@@ -30,7 +30,8 @@ class JobApplication(models.Model):
         email: The email address of the applicant.
     """
     date_submitted = models.DateTimeField(default=timezone.now)
-    applicant = models.ForeignKey(ProfessionalProfile, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(ProfessionalProfile,
+                                  on_delete=models.CASCADE)
     job = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

@@ -4,7 +4,7 @@ which is used to log in a user to the site.
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import login, authenticate
-from ...forms.log_in_form import LogInForm
+from Harmonix.forms.log_in_form import LogInForm
 from django.contrib import messages
 
 

@@ -6,15 +6,6 @@ from django.utils import timezone
 from .users import HarmonixUser
 
 
-TYPE = (
-    ("Bug report", "Bug report"),
-    ("Feature request", "Feature request"),
-    ("general feedback", "general feedback"),
-    ("complaint", "complaint"),
-    ("other", "other")
-)
-
-
 class Feedback(models.Model):
     """Feedback model.
     This model is used to store feedback.
@@ -29,6 +20,13 @@ class Feedback(models.Model):
         message: The message of the feedback.
         priority: The priority of the feedback.
     """
+    TYPE = (
+        ("Bug report", "Bug report"),
+        ("Feature request", "Feature request"),
+        ("general feedback", "general feedback"),
+        ("complaint", "complaint"),
+        ("other", "other")
+    )
     user = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE,
                              null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
