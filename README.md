@@ -2,7 +2,7 @@
 
 ## Description
 
-The Job Board for Local Businesses aims to address the problem of unemployment and underemployment in a specific region. It provides a platform for local businesses to post job listings and for job seekers to find local employment opportunities easily.
+SkillsHarmonix aims to address the problem of unemployment and underemployment in a specific region. It provides a platform for local businesses to post job listings and for job seekers to find local employment opportunities easily.
 
 The primary objective of the project is to establish a connection or bridge between businesses operating within the chosen locale and individuals who are actively seeking employment opportunities in that same area. The platform serves as a matchmaking service, ensuring that job listings from local businesses reach the local workforce.
 
@@ -32,7 +32,7 @@ The project's secondary objective is to provide a platform for local businesses 
 
 To install and run the Job Board for Local Businesses, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/cryptics-core-based/SkillsHarmonix.git`
+1. Clone the repository: `git clone https://github.com/Mcnores-Samuel/SkillsHarmonix.git`
 2. Navigate to the project directory: `cd SkillsHarmonix`
 3. Install the required dependencies: `pip install -r requirements.txt`
 4. Start the application: `python manage.py runserver`
