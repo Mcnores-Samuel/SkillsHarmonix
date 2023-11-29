@@ -28,7 +28,7 @@ def log_in(request):
                 login(request, user)
                 messages.success(request, 'Logged in successfully')
                 if user.user_type == 'Business owner':
-                    return redirect(reverse('business_profile'))
+                    return redirect(reverse('create_feedback'))
                 elif user.user_type == 'Job seeker':
                     return redirect(reverse('job_seeker_profile'))
                 else:
@@ -37,4 +37,4 @@ def log_in(request):
                 messages.error(request, 'Invalid email or password')
     else:
         form = LogInForm()
-    return render(request, 'registers/log_in.html', {'form': form})
+    return render(request, 'registers/log_in.html', {'form': form, "user": request.user})
