@@ -23,66 +23,66 @@ class JobPostForm(forms.Form):
         contacts: The contacts of the job post.
         How_to_apply: How to apply to the job post.
     """
-    title = forms.CharField(max_length=100, required=True,
-                            widget=forms.TextInput(
-                                attrs={'placeholder': 'Job Title'}
-                            )
-                            )
-    position = forms.CharField(max_length=100, required=True,
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': 'Job position'}))
-    description = forms.CharField(required=True,
-                                  widget=forms.Textarea(
-                                      attrs={'placeholder': 'Job Description'}
-                                  )
-                                  )
-    roles = forms.CharField(required=True,
-                            widget=forms.Textarea(
-                                attrs={'placeholder': 'Responsibilities\
-                                       or Roles (must be comma separated)'}
-                            )
-                            )
-    benefits = forms.CharField(required=True,
-                               widget=forms.Textarea(
-                                   attrs={'placeholder': 'Benefits\
-                                          (must be comma separated))'}
-                               )
-                               )
-    qualifications = forms.CharField(required=True,
-                                     widget=forms.Textarea(
-                                         attrs={'placeholder': '\
-                                         Qualifications or Requirements e.g.\
-                                         2 years experience, Bachelors\
-                                         Degree in Computer Science etc\
-                                                (must be comma separated)'}
-                                     )
-                                     )
-    salary = forms.CharField(max_length=50, required=False,
-                             widget=forms.TextInput(
-                                 attrs={'placeholder': 'Salary (optional)'})
-                             )
-    location = forms.CharField(max_length=255, required=True,
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': 'Location'})
-                               )
-    category = forms.CharField(max_length=100, required=True,
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': 'Category'})
-                               )
-    contacts = forms.CharField(max_length=255, required=True,
-                               widget=forms.TextInput(
-                                   attrs={'placeholder': 'Contacts'})
-                               )
-    How_to_apply = forms.CharField(required=True,
-                                   widget=forms.Textarea(
-                                       attrs={'placeholder': 'How to apply\
-                                              (must be comma separated)'})
-                                   )
-    cautions = forms.CharField(required=True,
-                               widget=forms.Textarea(
-                                   attrs={'placeholder': 'any cautions or\
-                                   warnings (must be comma separated)'})
-                               )
+    title = forms.CharField(
+        max_length=100, required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Job Title'}))
+    position = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Job position'}))
+    description = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Job Description'}))
+    roles = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Responsibilities' +\
+                   ' or Roles (must be comma separated)'}))
+    benefits = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Benefits' +\
+                   ' (must be comma separated)'}))
+    qualifications = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Qualifications or Requirements e.g.' +\
+                ' 2 years experience, Bachelors' +\
+                'Degree in Computer Science, etc.' +\
+                ' (must be comma separated)'}))
+    salary = forms.CharField(
+        max_length=50, required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Salary (optional)'}))
+    location = forms.CharField(
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Location'}))
+    category = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Category'}))
+    contacts = forms.CharField(
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Contacts'}))
+    How_to_apply = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'How to apply'\
+                + ' (must be comma separated)'}))
+    cautions = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'any cautions or'\
+                + ' warnings (must be comma separated)'}))
 
     def __init__(self, *args, **kwargs):
         """This method initializes the form.

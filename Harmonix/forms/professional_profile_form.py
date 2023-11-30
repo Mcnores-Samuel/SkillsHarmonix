@@ -18,39 +18,91 @@ class ProfessionalProfileForm(forms.Form):
         phone: The phone number of the user.
         email: The email address of the user.
     """
-    first_name = forms.CharField(max_length=50,
-                                 widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
-    last_name = forms.CharField(max_length=50,
-                                widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
-    address = forms.CharField(max_length=255,
-                                 widget=forms.TextInput(attrs={'placeholder': 'Address'}))
-    city = forms.CharField(max_length=50,
-                                    widget=forms.TextInput(attrs={'placeholder': 'City'}))
-    state = forms.CharField(max_length=50,
-                            widget=forms.TextInput(attrs={'placeholder': 'state'}))
-    country = forms.CharField(max_length=50,
-                                widget=forms.TextInput(attrs={'placeholder': 'Country'}))
-    zipcode = forms.CharField(max_length=50,
-                                widget=forms.TextInput(attrs={'placeholder': 'Zipcode'}))
-    phone = forms.CharField(max_length=50,
-                                widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
-    email = forms.CharField(max_length=100,
-                                widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    skills = forms.CharField(required=True,
-                             widget=forms.Textarea(attrs={'placeholder': 'Skills e.g. programming, design, etc'}))
-    bio = forms.CharField(required=True,
-                          widget=forms.Textarea(attrs={'placeholder': 'Describe yourself'}))
-    experience = forms.CharField(required=True,
-                                 widget=forms.Textarea(attrs={'placeholder': 'Describe your experience'}))
-    education = forms.CharField(required=True,
-                                widget=forms.Textarea(attrs={'placeholder': 'Describe your education'}))
-    resume = forms.FileField(required=False)
-    portfolio = forms.CharField(required=False,
-                                widget=forms.TextInput(attrs={'placeholder': 'Portfolio url'}))
-    preferences = forms.CharField(required=False,
-                                  widget=forms.Textarea(attrs={'placeholder': 'Preferences e.g. full-time, part-time, etc'}))
-    avatar = forms.ImageField(required=False,
-                                 widget=forms.FileInput(attrs={'placeholder': 'Avatar'}))
+    avatar = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={'placeholder': 'Avatar',
+                   'class': 'form-control'}))
+    first_name = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'First Name', 
+            'class': 'form-control'}))
+    last_name = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Last Name', 
+            'class': 'form-control'}))
+    address = forms.CharField(
+        max_length=255,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Address', 
+            'class': 'form-control'}))
+    city = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'City', 
+            'class': 'form-control'}))
+    state = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'state', 
+            'class': 'form-control'}))
+    country = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Country', 
+            'class': 'form-control'}))
+    zipcode = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Zipcode', 
+            'class': 'form-control'}))
+    phone = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Phone Number', 
+            'class': 'form-control'}))
+    email = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Email',
+                   'class': 'form-control'}))
+    resume = forms.FileField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={'placeholder': 'Resume',
+            'class': 'form-control'}))
+    portfolio = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Portfolio url',
+            'class': 'form-control'}))
+    skills = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Skills e.g. programming, design, etc',
+            'class': 'form-control'}))
+    bio = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Describe yourself',
+            'class': 'form-control'}))
+    experience = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Describe your experience',
+            'class': 'form-control'}))
+    education = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Describe your education',
+            'class': 'form-control'}))
+    preferences = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Preferences e.g. full-time, part-time, etc',
+            'class': 'form-control'}))
     
     def __init__(self, *args, **kwargs):
         """This method initializes the form.

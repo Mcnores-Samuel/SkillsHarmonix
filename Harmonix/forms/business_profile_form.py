@@ -16,37 +16,99 @@ class BusinessProfileForm(forms.Form):
         business_phone_number: The phone number of the business.
         business_address: The address of the business.
     """
-    business_name = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Business Name'}))
-    category = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Business Type'}))
-    address = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Address(Street)'}))
-    city = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'City'}))
-    state = forms.CharField(max_length=100, required=False,
-                                    widget=forms.TextInput(attrs={'placeholder': 'State'}))
-    country = forms.CharField(max_length=100, required=False,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Country'}))
-    zipcode = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Zipcode'}))
-    phone = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
-    email = forms.CharField(max_length=100, required=True,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Email'}))
-    website = forms.CharField(max_length=100, required=False,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Website url'}))
-    description = forms.CharField(required=True,
-                                    widget=forms.Textarea(attrs={'placeholder': 'Please describe your business'}))
-    history = forms.CharField(required=True,
-                                    widget=forms.Textarea(attrs={'placeholder': 'Please describe your business history'}))
-    registration_number = forms.CharField(max_length=100, required=False,
-                                    widget=forms.TextInput(attrs={'placeholder': 'Registration Number'}))
+    business_name = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Enter Business Name',
+            'class': 'form-control'})
+            )
+    category = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'e.g. Restaurant, Hotel, etc',
+            'class': 'form-control'})
+            )
+    address = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Address(Street)',
+            'class': 'form-control'})
+            )
+    city = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'City you are located in',
+            'class': 'form-control'})
+            )
+    state = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'State you are located in',
+            'class': 'form-control'})
+            )
+    country = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Country you are located in',
+            'class': 'form-control'})
+            )
+    zipcode = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Zipcode',
+            'class': 'form-control'})
+            )
+    phone = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Phone Number',
+            'class': 'form-control'})
+            )
+    email = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Email Address',
+            'class': 'form-control'})
+            )
+    website = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Website url',
+            'class': 'form-control'})
+            )
+    registration_number = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Registration Number',
+            'class': 'form-control'})
+            )
     business_certificate = forms.FileField(required=False)
     logo = forms.ImageField(required=False,
-                            widget=forms.FileInput(attrs={'placeholder': 'Business Logo'}))
-    cover_photo = forms.ImageField(required=False,
-                                   widget=forms.FileInput(attrs={'placeholder': 'Cover Photo'}))
+                            widget=forms.FileInput(attrs={'class': 'form-control'}))
+    cover_photo = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={'class': 'form-control'}))
+    description = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Please describe your business',
+                   'class': 'form-control'}))
+    history = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Please describe your business history',
+                   'class': 'form-control'}))
     
     def __init__(self, *args, **kwargs):
         """This method initializes the form.
