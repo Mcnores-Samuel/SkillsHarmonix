@@ -6,7 +6,8 @@ from .views.home_page import home_page
 from Harmonix.views.registers import (sign_up, log_in, log_out,
                               create_business_profile,
                               create_professional_profile,
-                              create_job_post, create_feedback)
+                              create_job_post, create_feedback,
+                              job_application_point)
 
 
 urlpatterns = [
@@ -25,4 +26,6 @@ urlpatterns = [
           name='create_job_post'),
      path('create_feedback/', create_feedback.create_feedback,
           name='create_feedback'),
+     path('job_application/<int:job_id>/', job_application_point.job_application_point,
+          name='job_application_point'),
 ]
