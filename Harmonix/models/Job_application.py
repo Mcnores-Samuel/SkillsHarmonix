@@ -5,6 +5,9 @@ from django.db import models
 from django.utils import timezone
 from .business_profile import BusinessProfile
 from .professional_profile import ProfessionalProfile
+from django.core.validators import (RegexValidator,
+                                    FileExtensionValidator,
+                                    validate_email)
 
 
 class JobApplication(models.Model):
@@ -31,7 +34,8 @@ class JobApplication(models.Model):
     """
     date_submitted = models.DateTimeField(default=timezone.now)
     applicant = models.ForeignKey(ProfessionalProfile,
-                                  on_delete=models.CASCADE)
+                                  on_delete=models.CASCADE,
+                                  null=True, blank=True)
     job = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -39,10 +43,18 @@ class JobApplication(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     country = models.CharField(max_length=50, null=True, blank=True)
-    resume = models.FileField(upload_to='Professional/resumes/')
+    resume = models.FileField(upload_to='Professional/resumes/', 
+                              validators=[FileExtensionValidator(['pdf', 'docx', 'doc'])])
     cover_letter = models.TextField()
-    phone = models.CharField(max_length=50)
-    email = models.CharField(max_length=100)
+    phone = models.CharField(max_length=50, 
+                             validators=[RegexValidator(
+                                 regex=r'^\+?1?\d{9,15}$',
+                                 message="Enter a valid phone number.")]
+                                 )
+    email = models.EmailField(
+        max_length=100,
+        unique=True,
+        validators=[validate_email])
 
     class Meta:
         app_label = 'Harmonix'

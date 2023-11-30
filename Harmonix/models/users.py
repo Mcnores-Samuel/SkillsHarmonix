@@ -5,6 +5,7 @@ create accounts and profiles.
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
+from django.core.validators import (FileExtensionValidator, validate_email)
 
 
 class UserProfileManager(BaseUserManager):
@@ -64,13 +65,14 @@ class HarmonixUser(AbstractUser):
         ("Job seeker", "Job seeker"),
         ("Admin", "Admin"),
     )
-    email = models.EmailField(max_length=50, unique=True)
+    email = models.EmailField(max_length=50, unique=True, validators=[validate_email])
     username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     user_type = models.CharField(max_length=25,
                                  choices=USER_TYPE, default='default')
-    image = models.ImageField(upload_to='User/images/', null=True, blank=True)
+    image = models.ImageField(upload_to='User/images/', null=True, blank=True,
+                              validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])])
 
     objects = UserProfileManager()
     USERNAME_FIELD = 'email'

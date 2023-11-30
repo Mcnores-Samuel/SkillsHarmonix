@@ -27,6 +27,7 @@ def log_in(request):
             if user and user.is_active:
                 login(request, user)
                 messages.success(request, 'Logged in successfully')
+                messages.success(request, 'Welcome back, ' + user.username + '!')
                 if user.user_type == 'Business owner':
                     return redirect(reverse('create_feedback'))
                 elif user.user_type == 'Job seeker':
