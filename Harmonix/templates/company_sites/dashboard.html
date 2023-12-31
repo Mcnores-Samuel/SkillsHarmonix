@@ -1,0 +1,108 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load crispy_forms_tags %}
+{% block navbar %}
+<div class="container-fluid w-100 h-100">
+    <div class="row border border-secondary h-100">
+        <div class="col-md-2 h-100">
+            <div class="sidebar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'business_dashboard' %}"
+                        data-bs-toggle="tooltip" 
+                        title="Dashboard">
+                            <span class="material-icons">
+                                dashboard
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_business_profile' %}"
+                        data-bs-toggle="tooltip" 
+                        title="Profile">
+                            <span class="material-icons">
+                                account_circle
+                            </span>
+                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'job_listings' %}"
+                        data-bs-toggle="tooltip" 
+                        title="Job listings">
+                            <span class="material-icons">
+                            view_list
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"
+                        data-bs-toggle="tooltip" 
+                        title="Job Applications">
+                            <span class="material-icons">
+                                work
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"
+                        data-bs-toggle="tooltip" 
+                        title="Messages">
+                            <span class="material-icons">
+                                message
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"
+                        data-bs-toggle="tooltip" 
+                        title="Settings">
+                            <span class="material-icons">
+                                settings
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'log_out' %}"
+                        data-bs-toggle="tooltip" 
+                        title="Logout">
+                            <span class="material-icons">
+                                logout
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_feedback' %}"
+                        data-bs-toggle="tooltip" 
+                        title="feedback">
+                            <span class="material-icons">
+                            feedback
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="data_view container">
+        {% block dataview %}
+        <div class="container">
+            <br>
+                {% bootstrap_messages %}
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Dashboard</h1>
+                    <p>Dashboard content goes here</p>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block footer %}
+{% endblock %}

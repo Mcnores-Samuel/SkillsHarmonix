@@ -3,5 +3,5 @@ from django.shortcuts import render
 
 
 @login_required
-def dashboard(request):
+def business_dashboard(request):
     return render(request, 'company_sites/dashboard.html', {})

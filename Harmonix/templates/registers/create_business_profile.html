@@ -1,28 +1,41 @@
-{% extends 'index.html' %}
+{% extends 'company_sites/dashboard.html' %}
 {% load static %}
-{% block container %}
+{% block dataview %}
 {% load crispy_forms_tags %}
+<br>
+<h1>My Business Profile</h1>
+<br>
+<img src="{{ form.logo.url }}" alt="" >
+<div class="container shadow-lg p-3 mb-5 bg-body rounded">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if business %}
+        <button type="submit" class="btn btn-primary">Save</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary">create profile</button>
+        {% endif %}
+    </form>
+</div>
+<br>
+<div class="container w-100">
+    <div class="pagination container-fluid w-100 d-flex justify-content-center">
+        <span class="step-links w-100 d-flex justify-content-around">
+            {% if job_listings.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ job_listings.previous_page_number }}">previous</a>
+            {% endif %}
 
-<section  style="background-color: #2779e2;">
+            <span class="current">
+                Page {{ job_listings.number }} of {{ job_listings.paginator.num_pages }}.
+            </span>
 
-    <div class="container py-5 h-100">
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-12 col-lg-9 col-xl-7">
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-            <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Professional Profile</h3>
-             
-            <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form|crispy }}
-               
-                <button type="submit" class="btn btn-primary">create profile</button>
-            </form>
-        
-            </div>
-          </div>
-        </div>
-      </div>
+            {% if job_listings.has_next %}
+                <a href="?page={{ job_listings.next_page_number }}">next</a>
+                <a href="?page={{job_listings.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
     </div>
-  </section>
+</div>
+<br>
 {% endblock %}

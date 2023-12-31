@@ -4,6 +4,7 @@ This form is used to create a job post.
 from django import forms
 from ..models.job_listings import JobListing
 from ..models.business_profile import BusinessProfile
+from ..models.users import HarmonixUser
 from django.utils import timezone
 
 
@@ -32,6 +33,25 @@ class JobPostForm(forms.Form):
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Job position'}))
+    salary = forms.CharField(
+        max_length=50, required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Salary (optional)'}))
+    location = forms.CharField(
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Location'}))
+    category = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Category'}))
+    contacts = forms.CharField(
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Contacts'}))
     description = forms.CharField(
         required=True,
         widget=forms.Textarea(
@@ -54,25 +74,7 @@ class JobPostForm(forms.Form):
                 ' 2 years experience, Bachelors' +\
                 'Degree in Computer Science, etc.' +\
                 ' (must be comma separated)'}))
-    salary = forms.CharField(
-        max_length=50, required=False,
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Salary (optional)'}))
-    location = forms.CharField(
-        max_length=255,
-        required=True,
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Location'}))
-    category = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Category'}))
-    contacts = forms.CharField(
-        max_length=255,
-        required=True,
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Contacts'}))
+
     How_to_apply = forms.CharField(
         required=True,
         widget=forms.Textarea(
@@ -91,14 +93,29 @@ class JobPostForm(forms.Form):
             **kwargs: Arbitrary keyword arguments.
         """
         self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs)
+        self.instance = kwargs.pop('instance', None)
+        super(JobPostForm, self).__init__(*args, **kwargs)
+
+        if self.instance:
+            self.fields['title'].initial = self.instance.title
+            self.fields['position'].initial = self.instance.position
+            self.fields['description'].initial = self.instance.description
+            self.fields['roles'].initial = self.instance.roles
+            self.fields['benefits'].initial = self.instance.benefits
+            self.fields['qualifications'].initial = self.instance.qualifications
+            self.fields['salary'].initial = self.instance.salary
+            self.fields['location'].initial = self.instance.location
+            self.fields['category'].initial = self.instance.category
+            self.fields['contacts'].initial = self.instance.contacts
+            self.fields['How_to_apply'].initial = self.instance.How_to_apply
+            self.fields['cautions'].initial = self.instance.cautions
 
     def clean(self):
         """This method cleans the form.
         Returns:create_business_profile
             A cleaned form.
         """
-        cleaned_data = super().clean()
+        cleaned_data = super(JobPostForm, self).clean()
         return cleaned_data
 
     def process_job_post(self):
@@ -106,7 +123,8 @@ class JobPostForm(forms.Form):
         Returns:
             A job post.
         """
-        company = BusinessProfile.objects.get(representative=self.user)
+        company = BusinessProfile.objects.get(
+            representative=HarmonixUser.objects.get(username=self.user.username))
         job_post = JobListing(
             company=company,
             date_posted=timezone.now(),

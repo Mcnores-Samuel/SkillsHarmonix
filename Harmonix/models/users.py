@@ -82,4 +82,4 @@ class HarmonixUser(AbstractUser):
         app_label = 'Harmonix'
 
     def __str__(self):
-        return self.username
+        return self.email

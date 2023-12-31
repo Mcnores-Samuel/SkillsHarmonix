@@ -19,7 +19,7 @@ def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            user = form.process_data()
             user.is_active = False
             send_email(user)
             user.save()

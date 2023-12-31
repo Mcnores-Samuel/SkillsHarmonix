@@ -30,7 +30,7 @@ class BusinessProfile(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     representative = models.ForeignKey(HarmonixUser, on_delete=models.CASCADE)
-    business_name = models.CharField(max_length=100)
+    business_name = models.CharField(max_length=100, unique=True)
     category = models.CharField(max_length=255, default='Other')
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=50)

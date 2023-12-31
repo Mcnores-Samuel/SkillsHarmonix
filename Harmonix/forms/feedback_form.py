@@ -14,19 +14,19 @@ class FeedBackForm(forms.Form):
         ("other", "other")
     )
     user_name = forms.CharField(
-        required=True,
+        required=False,
         widget=forms.TextInput(
             attrs={"placeholder": "Please enter your name"})
             )
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=False)
     feedback_type = forms.CharField(widget=forms.Select(choices=TYPE))
     message = forms.CharField(
-        required=True,
+        required=False,
         widget=forms.Textarea(
             attrs={"placeholder": "Please enter your feedback here"})
             )
     priority = forms.IntegerField(
-        required=True,
+        required=False,
         widget=forms.Select(
             choices=[(i, i) for i in range(1, 6)]),
             help_text="Please select a priority for your feedback from 1 to 5.\

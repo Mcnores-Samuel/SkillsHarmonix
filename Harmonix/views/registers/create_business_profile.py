@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from Harmonix.models import BusinessProfile
 
 
 @login_required
@@ -17,14 +18,26 @@ def create_business_profile(request):
     """
     if request.method == 'POST':
         user = request.user
-        form = BusinessProfileForm(request.POST, request.FILES, user=user)
+        business = BusinessProfile.objects.filter(representative=user).first()
+        if business:
+            form = BusinessProfileForm(request.POST, request.FILES,
+                                       instance=business, user=user)
+        else:
+            form = BusinessProfileForm(request.POST, request.FILES, user=user)
         if form.is_valid():
             bus_profile = form.process_profile()
             if bus_profile:
-                return redirect(reverse('log_in'))
+                messages.success(request, 'Business profile created successfully.')
+                form = BusinessProfileForm(instance=business, user=user)
+                return redirect(reverse('create_business_profile'))
         else:
             messages.error(request, form.errors)
     else:
-        form = BusinessProfileForm(user=request.user)
+        user = request.user
+        business = BusinessProfile.objects.filter(representative=user).first()
+        if business:
+            form = BusinessProfileForm(instance=business, user=user)
+        else:
+            form = BusinessProfileForm(user=request.user)
     return render(request, 'registers/create_business_profile.html',
-                  {'form': form})
+                  {'form': form, 'business': business})

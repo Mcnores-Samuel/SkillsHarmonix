@@ -117,14 +117,32 @@ class BusinessProfileForm(forms.Form):
             **kwargs: Arbitrary keyword arguments.
         """
         self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs)
+        self.business = kwargs.pop('instance', None)
+        super(BusinessProfileForm, self).__init__(*args, **kwargs)
+        if self.business:
+            self.fields['business_name'].initial = self.business.business_name
+            self.fields['category'].initial = self.business.category
+            self.fields['address'].initial = self.business.address
+            self.fields['city'].initial = self.business.city
+            self.fields['state'].initial = self.business.state
+            self.fields['country'].initial = self.business.country
+            self.fields['zipcode'].initial = self.business.zipcode
+            self.fields['phone'].initial = self.business.phone
+            self.fields['email'].initial = self.business.email
+            self.fields['website'].initial = self.business.website
+            self.fields['description'].initial = self.business.description
+            self.fields['history'].initial = self.business.history
+            self.fields['registration_number'].initial = self.business.registration_number
+            self.fields['business_certificate'].initial = self.business.business_certificate
+            self.fields['logo'].initial = self.business.logo
+            self.fields['cover_photo'].initial = self.business.cover_photo
     
     def clean(self):
         """This method cleans the form.
         Returns:create_business_profile
             A cleaned form.
         """
-        cleaned_data = super().clean()
+        cleaned_data = super(BusinessProfileForm, self).clean()
         return cleaned_data
     
     def process_profile(self):
@@ -156,6 +174,9 @@ class BusinessProfileForm(forms.Form):
             logo=self.cleaned_data['logo'],
             cover_photo=self.cleaned_data['cover_photo'],
         )
-        business_profile.save()
+        if not self.business:
+            business_profile.save()
+        else:
+            business_profile.id = self.business.id
+            business_profile.save()
         return business_profile
-    

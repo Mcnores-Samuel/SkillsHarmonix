@@ -16,7 +16,7 @@ def create_feedback(request):
             feedback = form.process_feedback()
             if feedback:
                 messages.success(request, 'Feedback Created successfully.')
-                return redirect('self_feedbacks')
+                return redirect('create_feedback')
             else:
                 messages.error(request, 'Feedback Creation failed.')
                 messages.error(request, form.errors)
