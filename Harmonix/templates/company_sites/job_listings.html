@@ -1,0 +1,62 @@
+{% extends 'company_sites/dashboard.html' %}
+{% load static %}
+{% block dataview %}
+{% load crispy_forms_tags %}
+<br>
+<div class="container w-100 border position-relative">
+    <h1>Job Listings</h1>
+    <a href="{% url 'create_job_post' %}">
+    <button type="button" class="btn btn-primary post-btn">Create Job post</button>
+    </a>
+</div>
+<br>
+{% if job_listings %}
+<section class="list-container">
+{% for job_listing in job_listings %}
+    <div class="card w-25">
+        <div class="card-body">
+            <h5 class="card-title">{{ job_listing.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ job_listing.category }}</h6>
+            <p class="card-text">{{ job_listing.description }}</p>
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal_{{ job_listing.id }}">
+                View Details
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_{{ job_listing.id }}" tabindex="-1" aria-labelledby="modal_{{ job_listing.id }}_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal_{{ job_listing.id }}_label">Job Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Title: {{ job_listing.title }}</p>
+                    <p>Type: {{ job_listing.category }}</p>
+                    <p>Description: {{ job_listing.description }}</p>
+                    <p>Role: {{ job_listing.roles }}</p>
+                </div>
+                <form action="{% url 'create_job_post' %}" class="container">
+                    {% csrf_token %}
+                    <input type="hidden" name="job_listing_id" value="{{ job_listing.id }}">
+                    <button type="submit" class="btn btn-primary w-100">Edit</button>
+                </form> 
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="modal-footer">
+                        <input type="hidden" name="job_listing_id" value="{{ job_listing.id }}">
+                        <button type="submit" class="btn btn-danger w-100">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+{% endfor %}
+</section>
+{% else %}
+    <p>No job listings available</p>
+{% endif %}
+{% endblock %}
