@@ -8,16 +8,13 @@ from Harmonix.views.registers import (sign_up, log_in, log_out,
                               create_professional_profile,
                               create_job_post, create_feedback,
                               job_application_point)
-from Harmonix.views.company_sites import dashboard
-from Harmonix.views.jobseeker_sites import dashboard as jobseeker_dashboard
 from Harmonix.views.general import job_listing
+from .views import dashboard
 
 
 urlpatterns = [
      path('', home_page, name='home_page'),
-     path('business_dashboard/', dashboard.business_dashboard, name='business_dashboard'),
-     path('jobseeker_dashboard/', jobseeker_dashboard.jobseeker_dashboard,
-          name='jobseeker_dashboard'),
+     path('dashboard/', dashboard.dashboard, name='dashboard'),
      # Paths for the registers in the Harmonix app.
      path('sign_up/', sign_up.sign_up, name='sign_up'),
      path('log_in/', log_in.log_in, name='log_in'),

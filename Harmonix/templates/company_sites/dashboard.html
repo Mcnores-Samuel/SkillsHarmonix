@@ -1,108 +1,428 @@
-{% extends 'index.html' %}
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% load crispy_forms_tags %}
-{% block navbar %}
-<div class="container-fluid w-100 h-100">
-    <div class="row border border-secondary h-100">
-        <div class="col-md-2 h-100">
-            <div class="sidebar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'business_dashboard' %}"
-                        data-bs-toggle="tooltip" 
-                        title="Dashboard">
-                            <span class="material-icons">
-                                dashboard
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="{% static 'styles/common.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/base_header.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
+        {% block head %}
+        {% endblock %}
+        <script src="{% static 'scripts/sidebar.js' %}" defer></script>
+        <script src="{% static 'scripts/placeholders.js' %}" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <button class="scroll-back"><i class='bx bxs-up-arrow-square'></i></button>
+        <div class="row w-100">
+            <div class="col-md-2 col-12">
+                <div class="topbar">
+                    <div class="logo custom-logo">HE</div>
+                    <button class="btn d-md-none menu-btn menu" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse">
+                        <span class="material-icons">
+                            menu
                             </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'create_business_profile' %}"
-                        data-bs-toggle="tooltip" 
-                        title="Profile">
-                            <span class="material-icons">
-                                account_circle
-                            </span>
-                        </a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'job_listings' %}"
-                        data-bs-toggle="tooltip" 
-                        title="Job listings">
-                            <span class="material-icons">
-                            view_list
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"
-                        data-bs-toggle="tooltip" 
-                        title="Job Applications">
-                            <span class="material-icons">
-                                work
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"
-                        data-bs-toggle="tooltip" 
-                        title="Messages">
-                            <span class="material-icons">
-                                message
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"
-                        data-bs-toggle="tooltip" 
-                        title="Settings">
-                            <span class="material-icons">
-                                settings
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'log_out' %}"
-                        data-bs-toggle="tooltip" 
-                        title="Logout">
-                            <span class="material-icons">
-                                logout
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'create_feedback' %}"
-                        data-bs-toggle="tooltip" 
-                        title="feedback">
-                            <span class="material-icons">
-                            feedback
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="data_view container">
-        {% block dataview %}
-        <div class="container">
-            <br>
-                {% bootstrap_messages %}
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Dashboard</h1>
-                    <p>Dashboard content goes here</p>
+                    </button>
+                </div>
+                <br>
+                <div class="collapse d-md-block wrapper" id="sidebarCollapse">
+                    <div class="sidebar">
+                        <div class="topbar-wrapper heading bg-success ">
+                            <div class="logo">
+                                <span class="material-icons">
+                                    menu
+                                </span>
+                            </div>
+                            <div class="text-center text-fs text-light brandname text">Skill Harmonix</div>
+                        </div>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href=""
+                                data-bs-toggle="tooltip" 
+                                title="Profile">
+                                    <span class="material-icons">
+                                        account_circle
+                                    </span>
+                                    <span class="text"> Profile</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href=""
+                                data-bs-toggle="tooltip" 
+                                title="Logout">
+                                    <span class="material-icons">
+                                        logout
+                                    </span>
+                                    <span class="text"> Logout</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href=""
+                                data-bs-toggle="tooltip" 
+                                title="feedback">
+                                    <span class="material-icons">
+                                    feedback
+                                    </span>
+                                    <span class="text"> Feedback</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        {% endblock %}
-    </div>
-</div>
-{% endblock %}
-{% block content %}
-{% endblock %}
-{% block footer %}
-{% endblock %}
+        <section class="presentaion">
+            {% block content %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% elif message.tags == 'error' %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% elif message.tags == 'warning' %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            <div class="top-display d-flex position-relative bg-light">
+                <form action="" method="post" class="d-flex position-relative search-form">
+                    {% csrf_token %}
+                    <input type="search" id="search_term" name="search_term" class="form-control me-2"
+                    placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-outline-light btn-primary search-btn">search</button>
+                </form>
+                <div class="notify">
+                    <div class="dropdown">
+                        <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="material-icons">
+                                notifications
+                            </span>
+                            <span class="badge bg-danger"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <div class="d-flex">
+                                            <span class="material-icons">
+                                                notifications
+                                            </span>
+                                        <div class="">
+                                            <p class=""></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="profile">
+                    {% if avatar.image %}
+                    <img src="{{ avatar.image.url }}" alt="avatar" class="avatar">
+                    {% else %}
+                        <span class="material-icons">
+                            account_circle
+                        </span>
+                    {% endif %}
+                    <div class="dropdown">
+                        <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="">
+                                    <div class="d-flex">
+                                        <div class="icon">
+                                            <span class="material-icons">
+                                                account_circle
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="">
+                                    <div class="d-flex">
+                                        <div class="icon">
+                                            <span class="material-icons">
+                                                logout
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                            <p>Logout</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <section class="charts-and-data">
+                <div class="row gy-3">
+                    <div class="col-md-3 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon">
+                                        <span class="material-icons">
+                                            inventory
+                                        </span>
+                                    </div>
+                                    <div class="">
+                                        <p>Overall Stock</p>
+                                        <p>{{ overall_stock }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="material-icons">
+                                        credit_score
+                                    </span>
+                                    <div class="">
+                                        <p>Overall Sales</p>
+                                        <p>{{ overall_sales }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon ">
+                                        <span class="material-icons">
+                                            outbound
+                                        </span>
+                                    </div>
+                                    <div class="">
+                                        <p>Main Shop Monthly Sales</p>
+                                        <p>{{ sales }} Devices</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="">
+                                    <p>Main shop target</p>
+                                    <div class="">
+                                        <div class="text-end">{{ target }} Devices</div>
+                                        {% if progress < 50 %}
+                                        <div class="progress">
+                                            <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
+                                            aria-valuemax="{{ terget }}">{{ progress }}%</div>
+                                        </div>
+                                        {% elif progress > 50 and progress < 100 %}
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
+                                            aria-valuemax="{{ target }}">{{ progress }}%</div>
+                                        </div>
+                                        {% elif progress == 100 %}
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
+                                            aria-valuemax="{{ terget }}">{{ progress }}%</div>
+                                        </div>
+                                        {% elif progress > 100 %}
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
+                                            aria-valuemax="{{ terget }}" style="background-color: purple;">{{ progress }}%</div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <section class="charts_by_chartjs">
+                <div class="row gy-3">
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Daily Sales on loan</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="daily_sales_loader_loan"></div>
+                                <canvas class="daily_sales_chart_loan" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Daily Sales on Cash</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="daily_sales_loader_cash"></div>
+                                <canvas class="daily_sales_chart_cash" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <section class="charts_by_chartjs">
+                <div class="row gy-3">
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Weekly Sales on loan</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="weekly_sales_loader_loan"></div>
+                                <canvas class="Weekly_sales_chart_loan" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Weekly Sales on Cash</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="weekly_sales_loader_cash"></div>
+                                <canvas class="Weekly_sales_chart_cash" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <section class="charts_by_chartjs">
+                <div class="row gy-3">
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Monthly Sales on loan</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="agent_sales_loan_chart_loader"></div>
+                                <canvas class="agent_sales_loan_chart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Monthly Sales on Cash</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="agent_sales_cash_chart_loader"></div>
+                                <canvas class="agent_sales_cash_chart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <section class="charts_by_chartjs">
+                <div class="row gy-3">
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Agent Overall Stock</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="loading-message-stock"></div>
+                                <canvas class="all_agents_stock_chart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Main Shop Stock</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="loading-message-shop"></div>
+                                <canvas class="main_stock_chart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <section class="yearly_analysis">
+                <div class="row">
+                    <div class="col-md-6 col-12 w-100">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Yearly Sales</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="yearly_sales_chart_loader"></div>
+                                <canvas class="yearly_sales_chart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br>
+            <section class="yearly_analysis">
+                <div class="row">
+                    <div class="col-md-6 col-12 w-100">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Product analytics</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="yearly_product_sales_chart_loader"></div>
+                                <canvas class="yearly_product_sales_chart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endblock %}
+        </section>
+        <div class="divider"></div>
+        <footer>
+            {% block footer %}
+            <div>
+                <p>&copy; 2023 Hafeez Enterprise. All rights reserved.</p>
+            </div>
+            {% endblock %}
+        </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

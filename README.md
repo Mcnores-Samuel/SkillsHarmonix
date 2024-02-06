@@ -43,4 +43,4 @@ Once the application is running, you can access it through your web browser at `
 
 ## Contributing
 
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.# SkillsHarmonix
+Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.

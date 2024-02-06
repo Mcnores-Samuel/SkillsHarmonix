@@ -28,11 +28,11 @@ def log_in(request):
                 login(request, user)
                 messages.success(request, 'Welcome back, ' + user.username + '!, ' + 'Logged in successfully')
                 if user.user_type == 'Business owner':
-                    return redirect('business_dashboard')
+                    return redirect('dashboard')
                 elif user.user_type == 'Job seeker':
-                    return redirect(reverse('job_seeker_profile'))
+                    return redirect('dashboard')
                 else:
-                    return redirect(reverse('create_professional_profile'))
+                    return redirect('home_page')
             else:
                 messages.error(request, 'Invalid email or password')
     else:
