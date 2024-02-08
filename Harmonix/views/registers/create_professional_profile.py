@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def create_professional_profile(request):
+def professional_profile(request):
     """This function is used to create a professional profile.
 
     Args:
@@ -26,5 +26,5 @@ def create_professional_profile(request):
             messages.error(request, form.errors)
     else:
         form = ProfessionalProfileForm(user=request.user)
-    return render(request, 'registers/create_professional_profile.html',
+    return render(request, 'registers/professional_profile.html',
                   {'form': form})

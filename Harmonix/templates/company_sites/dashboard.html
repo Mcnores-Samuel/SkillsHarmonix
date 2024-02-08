@@ -43,7 +43,7 @@
                         </div>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
+                                <a class="nav-link d-flex align-items-center" href="{% url 'business_profile' %}"
                                 data-bs-toggle="tooltip" 
                                 title="Profile">
                                     <span class="material-icons">
@@ -63,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
+                                <a class="nav-link d-flex align-items-center" href="{% url 'create_feedback' %}"
                                 data-bs-toggle="tooltip" 
                                 title="feedback">
                                     <span class="material-icons">
@@ -110,7 +110,7 @@
                 <form action="" method="post" class="d-flex position-relative search-form">
                     {% csrf_token %}
                     <input type="search" id="search_term" name="search_term" class="form-control me-2"
-                    placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    placeholder="Search" arcreate_feedbackia-label="Search" aria-describedby="search-addon" />
                     <button type="submit" class="btn btn-outline-light btn-primary search-btn">search</button>
                 </form>
                 <div class="notify">
@@ -183,243 +183,39 @@
                 </div>
             </div>
             <br>
-            <section class="charts-and-data">
-                <div class="row gy-3">
-                    <div class="col-md-3 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="icon">
-                                        <span class="material-icons">
-                                            inventory
-                                        </span>
-                                    </div>
-                                    <div class="">
-                                        <p>Overall Stock</p>
-                                        <p>{{ overall_stock }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="material-icons">
-                                        credit_score
-                                    </span>
-                                    <div class="">
-                                        <p>Overall Sales</p>
-                                        <p>{{ overall_sales }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="icon ">
-                                        <span class="material-icons">
-                                            outbound
-                                        </span>
-                                    </div>
-                                    <div class="">
-                                        <p>Main Shop Monthly Sales</p>
-                                        <p>{{ sales }} Devices</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="">
-                                    <p>Main shop target</p>
-                                    <div class="">
-                                        <div class="text-end">{{ target }} Devices</div>
-                                        {% if progress < 50 %}
-                                        <div class="progress">
-                                            <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ terget }}">{{ progress }}%</div>
-                                        </div>
-                                        {% elif progress > 50 and progress < 100 %}
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ target }}">{{ progress }}%</div>
-                                        </div>
-                                        {% elif progress == 100 %}
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ terget }}">{{ progress }}%</div>
-                                        </div>
-                                        {% elif progress > 100 %}
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ terget }}" style="background-color: purple;">{{ progress }}%</div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
             <section class="charts_by_chartjs">
                 <div class="row gy-3">
                     <div class="col-md-6 col-12">
                         <div class="card">
                             <div class="card-header text-center">
-                                <h4>Daily Sales on loan</h4>
+                                <h4>Recent Job Post</h4>
                             </div>
                             <div class="card-body">
-                                <div class="daily_sales_loader_loan"></div>
-                                <canvas class="daily_sales_chart_loan" width="400" height="400"></canvas>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="card">
                             <div class="card-header text-center">
-                                <h4>Daily Sales on Cash</h4>
+                                <h4>Recent Job Applications</h4>
                             </div>
                             <div class="card-body">
-                                <div class="daily_sales_loader_cash"></div>
-                                <canvas class="daily_sales_chart_cash" width="400" height="400"></canvas>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+                    
             </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Weekly Sales on loan</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="weekly_sales_loader_loan"></div>
-                                <canvas class="Weekly_sales_chart_loan" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Weekly Sales on Cash</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="weekly_sales_loader_cash"></div>
-                                <canvas class="Weekly_sales_chart_cash" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Monthly Sales on loan</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="agent_sales_loan_chart_loader"></div>
-                                <canvas class="agent_sales_loan_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Monthly Sales on Cash</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="agent_sales_cash_chart_loader"></div>
-                                <canvas class="agent_sales_cash_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Agent Overall Stock</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="loading-message-stock"></div>
-                                <canvas class="all_agents_stock_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Main Shop Stock</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="loading-message-shop"></div>
-                                <canvas class="main_stock_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="yearly_analysis">
-                <div class="row">
-                    <div class="col-md-6 col-12 w-100">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Yearly Sales</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="yearly_sales_chart_loader"></div>
-                                <canvas class="yearly_sales_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="yearly_analysis">
-                <div class="row">
-                    <div class="col-md-6 col-12 w-100">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Product analytics</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="yearly_product_sales_chart_loader"></div>
-                                <canvas class="yearly_product_sales_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        
             {% endblock %}
         </section>
         <div class="divider"></div>
         <footer>
             {% block footer %}
             <div>
-                <p>&copy; 2023 Hafeez Enterprise. All rights reserved.</p>
+                <p>&copy; 2023 SkillHarmonix. All rights reserved.</p>
             </div>
             {% endblock %}
         </footer>
