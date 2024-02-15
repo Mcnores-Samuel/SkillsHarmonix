@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="Harmonix/static/styles/common.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .animated-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.7s ease, transform 1.7s ease;
+        }
+
+        .animated-section.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <title>SkillHarmonix</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-primary bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="javascript:void(0)">SkillHarmonix</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon material-icons">menu</span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <section class="intro text-white p-5 animated-section">
+            <div class="container">
+                <h1 class="display-4 fw-bold">Welcome to Career Harmonix</h1>
+                <p class="lead">Connecting Local Businesses with Local Job Seekers</p>
+                <a href="#about" class="btn btn-light btn-lg">Learn more</a>
+            </div>
+        </section>
+        <br>
+        <section class="animated-section" id="services">
+            <h4 class="display-4 fs-3 text-center fw-bold">Our Services</h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="intro_background.jpg" alt="" srcset="">
+                            <div class="card-body">
+                                <h5 class="card-title">Job Listings</h5>
+                                <p class="card-text">Local businesses can post job listings on the platform, making it easy for job seekers to find local employment opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="intro_background.jpg" alt="" srcset="">
+                            <div class="card-body">
+                                <h5 class="card-title">Job Search</h5>
+                                <p class="card-text">Job seekers can search for local job listings and apply for jobs directly on the platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="intro_background.jpg" alt="" srcset="">
+                            <div class="card-body">
+                                <h5 class="card-title">Local Employment</h5>
+                                <p class="card-text">The platform aims to connect local businesses with local job seekers, promoting local employment opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-5 animated-section" id="about">
+            <div class="container">
+                <h2 class="display-4 fw-bold fs-3 text-center">About Us</h2>
+                <div class="container mt-5">
+                    <p>The Job Board for Local Businesses aims to address the problem of unemployment and underemployment in a specific region. It provides a platform for local businesses to post job listings and for job seekers to find local employment opportunities easily.</p>
+                    <p>The primary objective of the project is to establish a connection or bridge between businesses operating within the chosen locale and individuals who are actively seeking employment opportunities in that same area. The platform serves as a matchmaking service, ensuring that job listings from local businesses reach the local workforce.</p>
+                    <p>The project's effectiveness and impact are directly linked to the presence and active participation of two key groups: local businesses and local job seekers. The more businesses that post job listings and job seekers who use the platform, the more successful the project will be. It relies on a critical mass of both job listings and users to create a vibrant and effective local job market.</p>
+                </div>
+            </div>
+        </section>
+        <section class="animated-section">
+            <div class="container">
+                <h2 class="display-4 fw-bold fs-3 text-center mb-4">Meet Mcnores Samuel Nkhoma</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="profile.jpeg" class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px;" alt="Mcnores Samuel Nkhoma">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">Full Stack Engineer</h5>
+                                <p class="card-text">With a passion for building web applications, Mcnores is responsible for developing both the backend and frontend of the application. He utilizes technologies like Django, Bootstrap, JavaScript, and jQuery to ensure the platform meets its goals effectively.</p>
+                            </div>
+                            <div class="card-footer text-muted text-center">
+                                <p class="mb-0">Connect with Mcnores:</p>
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item"><a href="https://www.linkedin.com/in/mcnores-samuel-a4020b21b/" class="text-decoration-none">LinkedIn</a></li>
+                                    <li class="list-inline-item"><a href="https://github.com/Mcnores-Samuel" class="text-decoration-none">GitHub</a></li>
+                                    <li class="list-inline-item"><a href="https://twitter.com/SMcnores" class="text-decoration-none">X(Twitter)</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+    </div>
+    <footer>
+        <div>
+            <p>&copy; 2023 SkillHarmonix. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.animated-section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                    } else {
+                        entry.target.classList.remove('loaded');
+                    }
+                });
+            });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
