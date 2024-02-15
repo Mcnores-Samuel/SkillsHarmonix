@@ -15,7 +15,7 @@
 .wrapper .sidebar {
     width: 170px;
     height: 100%;
-    background: #2d3436;
+    background: #1a2442;
     position: fixed;
     top: 0;
     left: 0;
@@ -80,7 +80,12 @@
 
 .notify {
     position: absolute;
-    right: 6rem;
+    right: 70px;
+}
+
+.post {
+    position: absolute;
+    right: 150px;
 }
 
 .notify button {

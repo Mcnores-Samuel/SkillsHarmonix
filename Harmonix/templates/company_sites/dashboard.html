@@ -23,7 +23,7 @@
         <div class="row w-100">
             <div class="col-md-2 col-12">
                 <div class="topbar">
-                    <div class="logo custom-logo">HE</div>
+                    <div class="logo custom-logo">SHX</div>
                     <button class="btn d-md-none menu-btn menu" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse">
                         <span class="material-icons">
                             menu
@@ -43,6 +43,17 @@
                         </div>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center" href="{% url 'dashboard' %}"
+                                data-bs-toggle="tooltip"
+                                title="Dashboard">
+                                    <span class="material-icons">
+                                        dashboard
+                                    </span>
+                                    <span class="text"> Dashboard</span>
+                                </a>
+                            </li>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center" href="{% url 'business_profile' %}"
                                 data-bs-toggle="tooltip" 
                                 title="Profile">
@@ -53,7 +64,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center" href=""
+                            <a class="nav-link d-flex align-items-center" href="{% url 'log_out' %}"
                                 data-bs-toggle="tooltip" 
                                 title="Logout">
                                     <span class="material-icons">
@@ -113,6 +124,7 @@
                     placeholder="Search" arcreate_feedbackia-label="Search" aria-describedby="search-addon" />
                     <button type="submit" class="btn btn-outline-light btn-primary search-btn">search</button>
                 </form>
+                <a href="{% url 'create_job_post' %}" class="btn post btn-primary">Post</a>
                 <div class="notify">
                     <div class="dropdown">
                         <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -151,7 +163,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{% url 'business_profile' %}">
                                     <div class="d-flex">
                                         <div class="icon">
                                             <span class="material-icons">
@@ -165,7 +177,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{% url 'log_out' %}">
                                     <div class="d-flex">
                                         <div class="icon">
                                             <span class="material-icons">
@@ -212,13 +224,6 @@
             {% endblock %}
         </section>
         <div class="divider"></div>
-        <footer>
-            {% block footer %}
-            <div>
-                <p>&copy; 2023 SkillHarmonix. All rights reserved.</p>
-            </div>
-            {% endblock %}
-        </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

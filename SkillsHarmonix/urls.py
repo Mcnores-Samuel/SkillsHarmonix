@@ -25,6 +25,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('skillharmonix/', include('Harmonix.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', RedirectView.as_view(url='/skillharmonix/')),
     path('email/', include(email_urls))
 ]
