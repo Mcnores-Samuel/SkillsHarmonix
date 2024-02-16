@@ -10,14 +10,14 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
-        <title>{% block title %}Job Board for Local Businesses{% endblock %}</title>
+        <title>{% block title %}SkillHarmonix{% endblock %}</title>
     </head>
 
     <body>
         {% block navbar %}
         <nav class="navbar navbar-expand-sm navbar-primary bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="javascript:void(0)">SkillHarmonix</a>
+                <a class="navbar-brand fw-bold" href="/">SkillHarmonix</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                     <span class="navbar-toggler-icon material-icons">menu</span>
                 </button>
@@ -27,48 +27,112 @@
                             <a class="nav-link" href="{% url 'home_page' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">Service</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'log_in' %}">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'sign_up' %}">Sign up</a>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="text" placeholder="Search">
-                        <button class="btn btn-primary" type="button">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
         {% endblock %}
         <div>
             {% block container %}
-            <section class="intro text-white p-5">
+            <br>
+            <div class="container search-container">
+                <form action="" method="post" class="d-inline-flex w-100 position-relative">
+                    {% csrf_token %}
+                    <input type="search" class="form-control me-2 rounded-pill" name="" id="" placeholder="Search for the job that match your skills">
+                    <button type="submit" class="btn material-icons">
+                        search
+                    </button>
+                </form>
+            </div>
+            <br>
+            <br>
+            <section>
                 <div class="container">
-                    <h1 class="display-4">Welcome to Job Board</h1>
-                    <p class="lead">Connecting Local Businesses with Local Job Seekers</p>
-                    <a href="{% url 'sign_up' %}" class="btn btn-light btn-lg">Get Started</a>
-                </div>
-            </section>
-            <section class="py-5">
-                <div class="container">
-                    <h2 class="display-4">About Us</h2>
-                    <div class="container mt-5">
-                    <p>The Job Board for Local Businesses aims to address the problem of unemployment and underemployment in a specific region. It provides a platform for local businesses to post job listings and for job seekers to find local employment opportunities easily.</p>
-                    <p>The primary objective of the project is to establish a connection or bridge between businesses operating within the chosen locale and individuals who are actively seeking employment opportunities in that same area. The platform serves as a matchmaking service, ensuring that job listings from local businesses reach the local workforce.</p>
-                    <p>The project's effectiveness and impact are directly linked to the presence and active participation of two key groups: local businesses and local job seekers. The more businesses that post job listings and job seekers who use the platform, the more successful the project will be. It relies on a critical mass of both job listings and users to create a vibrant and effective local job market.</p>
-                </div>
-                <a href="#" class="btn btn-primary btn-lg">Learn More</a>
-                </div>
+                    <div class="row gy-3">
+                        {% for job in data %}
+                        <div class="col-md-4">
+                            <div class="card style-card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        {% if job.company.logo.url %}
+                                            <img src="{{ job.company.logo.url }}" alt="{{ job.company.business_name }}" class="img-fluid logo_img">
+                                        {% else %}
+                                            <span class="material-icons">
+                                                business
+                                            </span>
+                                        {% endif %}
+                                        <h6 class="card-subtitle mb-2 text-muted fw-bold">{{ job.company.business_name }}</h6>
+                                    </div>
+                                    <br>
+                                    <h5 class="card-title">{{ job.title }}</h5>
+                                    <p><strong>Location:</strong> {{ job.location }}</p>
+                                    <p class="text-muted fw-bold">{{ job.working_time }}</p>
+                                    <p class="text-muted fw-bold">{{ job.working_location }}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <button type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#viewJobModal{{ job.id }}"
+                                        class="btn btn-primary">
+                                            View Details
+                                        </button>
+                                        <a href="http://" class="btn btn-primary">
+                                            Apply
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="viewJobModal{{ job.id }}" tabindex="-1" aria-labelledby="viewJobModalLabel{{ job.id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="container d-inline-flex gap-3 align-items-center">
+                                                {% if job.company.logo.url %}
+                                                    <img src="{{ job.company.logo.url }}" alt="{{ job.company.business_name }}" class="img-fluid logo_img">
+                                                {% else %}
+                                                    <span class="material-icons">
+                                                        business
+                                                    </span>
+                                                {% endif %}
+                                                 <h5 class="modal-title fw-bold mb-2 text-muted fw-bold" id="viewJobModalLabel{{ job.id }}">{{ job.company.business_name }}</h5>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body style-card">
+                                            <h5 class="text-center fw-bold" id="viewJobModalLabel{{ job.id }}">{{ job.title }}</h5>
+                                            <p><strong>Posted On:</strong> {{ job.date_posted }}</p>
+                                            <p><strong>Deadline:</strong> {{ job.deadline }}</p>
+                                            <p><strong>Working Time:</strong> {{ job.working_time }}</p>
+                                            <p><strong>Working Location:</strong> {{ job.working_location }}</p>
+                                            <p><strong>Position:</strong> {{ job.position }}</p>
+                                            <p><strong>Salary:</strong> {{ job.salary }}</p>
+                                            <p><strong>Location:</strong> {{ job.location }}</p>
+                                            <p><strong>Job Description:</strong> {{ job.description }}</p>
+                                            <p><strong>Your Roles:</strong> {{ job.roles }}</p>
+                                            <p><strong>Skills:</strong> {{ job.skills }}</p>
+                                            <p><strong>Qualifications:</strong> {{ job.qualifications }}</p>
+                                            <p><strong>Experience:</strong> {{ job.experience }}</p>
+                                            <p><strong>Education:</strong> {{ job.education }}</p>
+                                            <p><strong>Benefits:</strong> {{ job.benefits }}</p>
+                                            <p><strong>Contacts:</strong> {{ job.contacts }}</p>
+                                            <p><strong>How to apply:</strong> {{ job.how_to_apply }}</p>
+                                            <p><strong>cautions:</strong> {{ job.cautions }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
             </section>
             {% endblock %}
         </div>
+        <br>
         <footer>
             {% block footer %}
             <div>

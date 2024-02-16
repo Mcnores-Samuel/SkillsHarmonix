@@ -1,4 +1,3 @@
-from typing import Any
 from ..models.business_profile import BusinessProfile
 from ..models.users import HarmonixUser
 from django import forms
@@ -16,6 +15,14 @@ class BusinessProfileForm(forms.Form):
         business_phone_number: The phone number of the business.
         business_address: The address of the business.
     """
+    logo = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={'class': 'form-control'}
+            ))
+    cover_photo = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={'class': 'form-control'}))
     business_name = forms.CharField(
         max_length=100,
         required=True,
@@ -94,11 +101,6 @@ class BusinessProfileForm(forms.Form):
             'class': 'form-control'})
             )
     business_certificate = forms.FileField(required=False)
-    logo = forms.ImageField(required=False,
-                            widget=forms.FileInput(attrs={'class': 'form-control'}))
-    cover_photo = forms.ImageField(
-        required=False,
-        widget=forms.FileInput(attrs={'class': 'form-control'}))
     description = forms.CharField(
         required=True,
         widget=forms.Textarea(

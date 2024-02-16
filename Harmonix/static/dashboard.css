@@ -6,9 +6,23 @@
     color: #6c757d;
 }
 
-.row {
-    width: 70px;
-    position: fixed;
+.logo_img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.style-card {
+    background-color: #1a2442;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.search-container {
+    width: 50%;
 }
 
 .post-btn {
@@ -21,4 +35,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+
+@media screen and (max-width: 50rem) {
+    .search-container {
+        width: 100%;
+    }
+    
 }

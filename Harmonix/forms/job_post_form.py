@@ -28,6 +28,10 @@ class JobPostForm(forms.Form):
         max_length=100, required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Job Title'}))
+    deadline = forms.DateField(
+        required=True,
+        widget=forms.DateInput(
+            attrs={'type': 'date'}))
     position = forms.CharField(
         max_length=100,
         required=True,
@@ -98,6 +102,7 @@ class JobPostForm(forms.Form):
 
         if self.instance:
             self.fields['title'].initial = self.instance.title
+            self.fields['deadline'].initial = self.instance.deadline
             self.fields['position'].initial = self.instance.position
             self.fields['description'].initial = self.instance.description
             self.fields['roles'].initial = self.instance.roles
@@ -128,7 +133,7 @@ class JobPostForm(forms.Form):
         job_post = JobListing(
             company=company,
             date_posted=timezone.now(),
-            deadline=timezone.now(),
+            deadline=self.cleaned_data['deadline'],
             title=self.cleaned_data['title'],
             position=self.cleaned_data['position'],
             description=self.cleaned_data['description'],
