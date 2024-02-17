@@ -24,14 +24,14 @@
             <div class="col-md-2 col-12">
                 <div class="topbar">
                     <div class="logo custom-logo">SHX</div>
-                    <button class="btn d-md-none menu-btn menu" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse">
+                    <button class="navbar-toggler menu" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse">
                         <span class="material-icons">
                             menu
                             </span>
                     </button>
                 </div>
                 <br>
-                <div class="collapse d-md-block wrapper" id="sidebarCollapse">
+                <div class="collapse navbar-collapse d-md-block wrapper" id="sidebarCollapse">
                     <div class="sidebar">
                         <div class="topbar-wrapper heading bg-success ">
                             <div class="logo">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="text-center text-fs text-light brandname text">Skill Harmonix</div>
                         </div>
-                        <ul class="navbar-nav flex-column">
+                        <ul class="navbar-nav flex-column me-auto">
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center" href="{% url 'dashboard' %}"
                                 data-bs-toggle="tooltip"
@@ -300,7 +300,36 @@
                                 <h4>Recent Job Applications</h4>
                             </div>
                             <div class="card-body">
-                                
+                                {% for application in apps %}
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ application.job.title }}</h5>
+                                        <p class="card-text">{{ application.applicant.username }}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button type="button" class="btn btn-primary me-2 w-25" data-bs-toggle="modal" data-bs-target="#viewAppModal{{ application.id }}">Review</button>
+                                            <button type="button" class="btn btn-danger w-25" data-bs-toggle="modal" data-bs-target="#deleteAppModal{{ application.id }}">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <!-- View Application Modal -->
+
+                                <div class="modal fade" id="viewAppModal{{ application.id }}" tabindex="-1" aria-labelledby="viewAppModalLabel{{ application.id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewAppModalLabel{{ application.id }}">{{ application.job.title }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

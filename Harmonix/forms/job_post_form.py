@@ -32,11 +32,19 @@ class JobPostForm(forms.Form):
         required=True,
         widget=forms.DateInput(
             attrs={'type': 'date'}))
+    working_time = forms.CharField(
+        max_length=100, required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Working Time e.g. Full Time, Part Time, etc'}))
+    working_location = forms.CharField(
+        max_length=100, required=True,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Working Location e.g. Onsite, Remote, etc'}))
     position = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
-            attrs={'placeholder': 'Job position'}))
+            attrs={'placeholder': 'Job position e.g. senior developer, etc'}))
     salary = forms.CharField(
         max_length=50, required=False,
         widget=forms.TextInput(
@@ -56,6 +64,18 @@ class JobPostForm(forms.Form):
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Contacts'}))
+    skills = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Skills you are looking for (optional)'}))
+    experience = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Experience you need (optional)'}))
+    education = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={'placeholder': 'Education level you are looking for (optional)'}))
     description = forms.CharField(
         required=True,
         widget=forms.Textarea(
@@ -103,7 +123,12 @@ class JobPostForm(forms.Form):
         if self.instance:
             self.fields['title'].initial = self.instance.title
             self.fields['deadline'].initial = self.instance.deadline
+            self.fields['working_time'].initial = self.instance.working_time
+            self.fields['working_location'].initial = self.instance.working_location
             self.fields['position'].initial = self.instance.position
+            self.fields['skills'].initial = self.instance.skills
+            self.fields['experience'].initial = self.instance.experience
+            self.fields['education'].initial = self.instance.education
             self.fields['description'].initial = self.instance.description
             self.fields['roles'].initial = self.instance.roles
             self.fields['benefits'].initial = self.instance.benefits
@@ -134,6 +159,11 @@ class JobPostForm(forms.Form):
             company=company,
             date_posted=timezone.now(),
             deadline=self.cleaned_data['deadline'],
+            working_time=self.cleaned_data['working_time'],
+            working_location=self.cleaned_data['working_location'],
+            skills=self.cleaned_data['skills'],
+            experience=self.cleaned_data['experience'],
+            education=self.cleaned_data['education'],
             title=self.cleaned_data['title'],
             position=self.cleaned_data['position'],
             description=self.cleaned_data['description'],

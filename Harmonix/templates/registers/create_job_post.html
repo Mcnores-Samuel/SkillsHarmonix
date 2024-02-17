@@ -5,23 +5,25 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% block content %}
-<br>
-<h1 class="text-center">Job Decription</h1>
-<br>
 <div class="container">
-    {% bootstrap_messages %}
-</div>
-<div class="container shadow-lg p-3 mb-5 bg-body rounded">
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
+    <br>
+    <h1 class="text-center">Job Decription</h1>
+    <br>
+    <div class="container">
+        {% bootstrap_messages %}
+    </div>
+    <div class="container shadow-lg p-3 mb-5 bg-body rounded w-50">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
 
-        {% if job_instance %}
-         <button type="submit" class="btn btn-primary">update</button>
-        {% else %}
-            <button type="submit" class="btn btn-primary">Post</button>
-        {% endif %}
-    </form>
+            {% if job_instance %}
+            <button type="submit" class="btn btn-primary">update</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary">Post</button>
+            {% endif %}
+        </form>
+    </div>
+    <br>
 </div>
-<br>
 {% endblock %}

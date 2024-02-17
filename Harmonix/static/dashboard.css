@@ -23,6 +23,23 @@
     width: 50%;
 }
 
+.search-input{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.search-btn {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #1a2442;
+    color: white;
+}
+
+.search-btn:hover {
+    opacity: 0.8;
+    color: white;
+}
+
 .post-btn {
     position: absolute;
     top: 0.5rem;

@@ -50,7 +50,8 @@ class JobApplicationForm(forms.Form):
             )
     resume = forms.FileField(
         widget=forms.FileInput(
-            attrs={'class': 'form-control'})
+            attrs={'class': 'form-control',
+                   'help_text': 'Upload your 1 or 2 page resume here.',})
             )
     cover_letter = forms.CharField(
         widget=forms.Textarea(

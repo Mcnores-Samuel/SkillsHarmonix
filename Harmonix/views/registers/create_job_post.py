@@ -24,7 +24,7 @@ def create_job_post(request):
             job_post = form.process_job_post()
             if job_post:
                 messages.success(request, 'Job Post Created successfully.')
-                return redirect('job_listings')
+                return redirect('dashboard')
             else:
                 messages.error(request, 'Job Post Creation failed.')
                 messages.error(request, form.errors)

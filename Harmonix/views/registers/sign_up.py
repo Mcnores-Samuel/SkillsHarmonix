@@ -19,7 +19,9 @@ def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.process_data()
+            interest = form.cleaned_data['register_interest']
+            user = form.save(commit=False)
+            user.user_type = interest
             user.is_active = False
             send_email(user)
             user.save()

@@ -3,8 +3,9 @@ allowing users to create accounts.
 """
 from ..models.users import HarmonixUser
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
-class SignUpForm(forms.Form):
+class SignUpForm(UserCreationForm):
     """Sign up form.
     This form is used to sign up users.
     Attributes:
@@ -24,15 +25,6 @@ class SignUpForm(forms.Form):
         widget=forms.TextInput(
             attrs={'placeholder': 'Username',
                    'class': 'form-control'}))
-    password = forms.CharField(
-        required=True,
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Password',
-                   'class': 'form-control'}))
-    confirm_password = forms.CharField(
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Confirm password',
-                   'class': 'form-control'}))
     register_interest = forms.ChoiceField(
         choices=[
                  ('Business owner', 'Business owner'),
@@ -42,31 +34,6 @@ class SignUpForm(forms.Form):
         widget=forms.Select(
             attrs={'class': 'form-control'}))
     
-    def clean(self):
-        """Clean method.
-        This method is used to validate the form.
-        Returns:
-            The cleaned data.
-        """
-        cleaned_data = super(SignUpForm, self).clean()
-        password = cleaned_data.get('password')
-        confirm_password = cleaned_data.get('confirm_password')
-        if password != confirm_password:
-            raise forms.ValidationError(
-                "Passwords don't match. Please try again.")
-        return cleaned_data
-    
-    def process_data(self):
-        """Process data method.
-        This method is used to process the form data.
-        Returns:
-            The user object.
-        """
-        user = HarmonixUser(
-            username=self.cleaned_data['username'],
-            email=self.cleaned_data['email'],
-            user_type=self.cleaned_data['register_interest']
-            )
-        return user
-    
-
+    class Meta:
+        model = HarmonixUser
+        fields = ('username', 'email', 'password1', 'password2', 'register_interest')
