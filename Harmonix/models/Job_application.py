@@ -3,7 +3,7 @@ allowing users to submit job applications.
 """
 from django.db import models
 from django.utils import timezone
-from .business_profile import BusinessProfile
+from .job_listings import JobListing
 from .professional_profile import ProfessionalProfile
 from django.core.validators import (RegexValidator,
                                     FileExtensionValidator,
@@ -36,7 +36,7 @@ class JobApplication(models.Model):
     applicant = models.ForeignKey(ProfessionalProfile,
                                   on_delete=models.CASCADE,
                                   null=True, blank=True)
-    job = models.ForeignKey(BusinessProfile, on_delete=models.CASCADE)
+    job = models.ForeignKey(JobListing, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
@@ -53,7 +53,6 @@ class JobApplication(models.Model):
                                  )
     email = models.EmailField(
         max_length=100,
-        unique=True,
         validators=[validate_email])
 
     class Meta:

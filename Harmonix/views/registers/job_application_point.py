@@ -15,20 +15,20 @@ def job_application_point(request, job_id):
         HttpResponse: The response object containing the job application page.
     """
     if request.method == 'POST':
-        form = JobApplicationForm(request.POST, request.FILES, user=request.user)
+        form = JobApplicationForm(request.POST, request.FILES)
         if form.is_valid():
-            application = form.process_application(job_id)
+            application = form.process_application(job_id=int(job_id), user=request.user)
             if application == "Already applied":
                 messages.error(request, "You have already applied for this job.")
-                return redirect(reverse('dashboard'))
+                return redirect('home_page')
             elif application:
                 messages.success(request, "You have successfully applied for this job.")
-                return redirect(reverse('dashboard'))
+                return redirect('home_page')
             else:
                 messages.error(request, "There was an error processing your application.")
         else:
             messages.error(request, form.errors)
     else:
-        form = JobApplicationForm(user=request.user)
+        form = JobApplicationForm()
     return render(request, 'registers/job_application.html',
                   {'form': form, "user": request.user})

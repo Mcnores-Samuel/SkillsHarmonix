@@ -1,13 +1,20 @@
 {% extends 'index.html' %}
 {% load static %}
-{% block container %}
-{% load django_bootstrap5 %}
+{% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
-{% endif %}
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Apply</button>
-</form>
+{% block container %}
+{% bootstrap_messages %}
+<br>
+<div class="container animated-section">
+    <div class="container w-50">
+        <h1 class="text-center fw-bold">Job Application</h1>
+        <p class="text-center fw-bold">We're excited to hear from you! Please fill out this form to apply for the position. Make sure to provide all the required information and carefully review your application before submitting.</p>
+        <form action="" class="shadow-lg p-3 mb-5 bg-body rounded" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

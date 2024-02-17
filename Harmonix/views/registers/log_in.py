@@ -31,6 +31,8 @@ def log_in(request):
                     return redirect('dashboard')
                 elif user.user_type == 'Job seeker':
                     return redirect('dashboard')
+                elif user.is_superuser:
+                    return redirect('/admin/')
                 else:
                     return redirect('home_page')
             else:

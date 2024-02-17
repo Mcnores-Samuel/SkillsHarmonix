@@ -1,6 +1,6 @@
-from typing import Any
 from ..models.Job_application import JobApplication
 from ..models.job_listings import JobListing
+from ..models.users import HarmonixUser
 from django import forms
 from django.utils import timezone
 
@@ -69,7 +69,6 @@ class JobApplicationForm(forms.Form):
         )
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
         super(JobApplicationForm, self).__init__(*args, **kwargs)
 
     def clean(self):
@@ -79,18 +78,24 @@ class JobApplicationForm(forms.Form):
         cleaned_data = super().clean()
         return cleaned_data
     
-    def process_application(self, job_id):
+    def process_application(self, job_id, user=None):
         """Process application.
         This method is used to process the job application form.
         """
-        job_to_apply = JobListing.objects.get(id=job_id)
-        if JobApplication.objects.get(job=job_to_apply,
-                                      first_name=self.cleaned_data['first_name'],
-                                      last_name=self.cleaned_data['last_name']):
-            return "Already applied"
+        job_to_apply = JobListing.objects.get(id=int(job_id))
+        try:
+            if JobApplication.objects.get(
+                job=job_to_apply,
+                first_name=self.cleaned_data['first_name'],
+                last_name=self.cleaned_data['last_name'],
+                email=self.cleaned_data['email']
+                ):
+                return "Already applied"
+        except JobApplication.DoesNotExist:
+            pass
         
-        if self.user:
-            user = JobApplication.objects.get(applicant=self.user)
+        if user and user.is_authenticated and user.is_active and user.is_professional:
+            user = HarmonixUser.objects.get(id=user.id)
             job_application = JobApplication(
                 date_submitted=timezone.now(),
                 applicant=user,
@@ -108,7 +113,7 @@ class JobApplicationForm(forms.Form):
                 )
             job_application.save()
             return job_application
-        elif not self.user:
+        else:
             job_application = JobApplication(
                 date_submitted=timezone.now(),
                 job=job_to_apply,

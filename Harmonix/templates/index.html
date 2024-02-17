@@ -1,9 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -11,8 +9,19 @@
         <link rel="stylesheet" href="{% static 'dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
         <title>{% block title %}SkillHarmonix{% endblock %}</title>
+        <style>
+            .animated-section {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 1.7s ease, transform 1.7s ease;
+            }
+    
+            .animated-section.loaded {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
     </head>
-
     <body>
         {% block navbar %}
         <nav class="navbar navbar-expand-sm navbar-primary bg-light">
@@ -39,11 +48,38 @@
         {% endblock %}
         <div>
             {% block container %}
+            {% if messages %}
+            <div class="messages animated-section">
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% elif message.tags == 'warning' %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
             <br>
-            <div class="container search-container">
+            <div class="container search-container animated-section">
                 <form action="" method="post" class="d-inline-flex w-100 position-relative">
                     {% csrf_token %}
-                    <input type="search" class="form-control me-2 rounded-pill" name="" id="" placeholder="Search for the job that match your skills">
+                    <input type="search" class="form-control me-2 rounded-pill" name="search_query" id="search_query" placeholder="Search for the job that match your skills">
                     <button type="submit" class="btn material-icons">
                         search
                     </button>
@@ -51,12 +87,12 @@
             </div>
             <br>
             <br>
-            <section>
+            <section class="">
                 <div class="container">
                     <div class="row gy-3">
                         {% for job in data %}
                         <div class="col-md-4">
-                            <div class="card style-card">
+                            <div class="card style-card animated-section">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
                                         {% if job.company.logo.url %}
@@ -80,7 +116,7 @@
                                         class="btn btn-primary">
                                             View Details
                                         </button>
-                                        <a href="" class="btn btn-primary">
+                                        <a href="{% url 'job_application_point' job_id=job.id %}" class="btn btn-primary">
                                             Apply
                                         </a>
                                     </div>
@@ -159,6 +195,23 @@
             </div>
             {% endblock %}
         </footer>
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                const sections = document.querySelectorAll('.animated-section');
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('loaded');
+                        } else {
+                            entry.target.classList.remove('loaded');
+                        }
+                    });
+                });
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

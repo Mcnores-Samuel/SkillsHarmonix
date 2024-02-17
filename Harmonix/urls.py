@@ -29,7 +29,7 @@ urlpatterns = [
           name='create_job_post'),
      path('create_feedback/', create_feedback.create_feedback,
           name='create_feedback'),
-     path('job_application/<int:job_id>/', job_application_point.job_application_point,
+     path('job_application_point/<int:job_id>/', job_application_point.job_application_point,
           name='job_application_point'),
      # Paths for the company sites in the Harmonix app.
      path('job_listings/', job_listing.job_listings, name='job_listings'),
