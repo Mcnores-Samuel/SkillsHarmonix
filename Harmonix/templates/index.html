@@ -4,7 +4,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
@@ -46,7 +49,7 @@
             </div>
         </nav>
         {% endblock %}
-        <div>
+        <main>
             {% block container %}
             {% if messages %}
             <div class="messages animated-section">
@@ -93,29 +96,41 @@
             </div>
             <br>
             <div class="container animated-section">
-                <form action="" method="post">
+                <form action="" method="post" id="filter_form">
                     {% csrf_token %}
-                    <div class="input-group mb-3 gap-5">
+                    <div class="input-group mb-3 gap-5 d-flex justify-content-between">
                         <div class="d-flex gap-2 align-items-center">
-                            <label for="location" class="form-label">Location</label>
-                            <input type="text" class="form-control" name="location" id="location" placeholder="Location">
+                            <label for="location_ft" class="form-label fw-bold text-muted">Location</label>
+                            <input type="text" class="form-control" name="location" id="location_ft" placeholder="Location" list="locations">
+                            <datalist id="locations">
+                                {% for location in locations %}
+                                    <option value="{{ location }}">{{ location }}</option>
+                                {% endfor %}
+                            </datalist>
                         </div>
                         <div class="d-flex gap-2 align-items-center">
-                            <label for="position" class="form-label">Position</label>
-                            <input type="text" class="form-control" name="position" id="position" placeholder="Position">
+                            <label for="position_ft" class="form-label fw-bold text-muted">Position</label>
+                            <input type="text" class="form-control" name="position" id="position_ft" placeholder="Position" list="positions">
+                            <datalist id="positions">
+                                {% for position in pos %}
+                                    <option value="{{ position }}">{{ position }}</option>
+                                {% endfor %}
+                            </datalist>
                         </div>
                         <div class="d-flex gap-2 align-items-center">
-                            <label for="category" class="form-label">Category</label>
-                            <input type="text" class="form-control" name="category" id="category" placeholder="Category">
-                            <datalist id="category">
-                                <option value="business">Business</option>
-                                <option value="banking and finance"></option>
+                            <label for="category_ft" class="form-label fw-bold text-muted">Category</label>
+                            <input type="text" class="form-control" name="category" id="category_ft" placeholder="Category" list="categories">
+                            <datalist id="categories">
+                                {% for category in categories %}
+                                    <option value="{{ category }}">{{ category }}</option>
+                                {% endfor %}
                             </datalist>
                         </div>
                     </div>
                 </form>
             </div>
             <br>
+            {% if data %}
             <section class="">
                 <div class="container">
                     <div class="row gy-3">
@@ -141,7 +156,7 @@
                                     <p class="text-muted fw-bold">{{ job.working_time }}</p>
                                     <p class="text-muted fw-bold">{{ job.working_location }}</p>
                                     <div class="d-flex justify-content-center">
-                                        <a href="{% url 'job_application_point' job_id=job.id %}" class="btn btn-primary w-100">
+                                        <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100">
                                             Apply
                                         </a>
                                     </div>
@@ -210,8 +225,13 @@
                     </span>
                 </div>
             </div>
+            {% else %}
+            <div class="container animated-section">
+                <h1 class="text-center text-muted fw-bold">No matching job found</h1>
+            </div>
+            {% endif %}
             {% endblock %}
-        </div>
+        </main>
         <br>
         <footer>
             {% block footer %}
@@ -235,6 +255,25 @@
                 sections.forEach(section => {
                     observer.observe(section);
                 });
+            });
+
+            const filter_form = $('#filter_form');
+            const location_ft = $('#location_ft');
+            const position_ft = $('#position_ft');
+            const category_ft = $('#category_ft');
+            category_ft.on('change', () => {
+                console.log('category changed');
+                filter_form.submit();
+            });
+
+            position_ft.on('change', () => {
+                console.log('position changed');
+                filter_form.submit();
+            });
+
+            location_ft.on('change', () => {
+                console.log('location changed');
+                filter_form.submit();
             });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
