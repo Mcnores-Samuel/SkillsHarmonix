@@ -198,6 +198,12 @@
                                             <p><strong>Contacts:</strong> {{ job.contacts }}</p>
                                             <p><strong>How to apply:</strong> {{ job.how_to_apply }}</p>
                                             <p><strong>cautions:</strong> {{ job.cautions }}</p>
+
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100">
+                                                    Apply
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
