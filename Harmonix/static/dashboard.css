@@ -77,6 +77,10 @@ footer {
     gap: 1rem;
 }
 
+.modal-size {
+    width: 75%;
+}
+
 
 @media screen and (max-width: 50rem) {
     .search-container {
