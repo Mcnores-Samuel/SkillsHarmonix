@@ -67,29 +67,35 @@ class JobPostForm(forms.Form):
     skills = forms.CharField(
         required=False,
         widget=forms.Textarea(
-            attrs={'placeholder': 'Skills you are looking for (optional)'}))
+            attrs={'placeholder': 'Skills you are looking for (optional)',
+                   'rows': 3, 'cols': 40}))
     experience = forms.CharField(
         required=False,
         widget=forms.Textarea(
-            attrs={'placeholder': 'Experience you need (optional)'}))
+            attrs={'placeholder': 'Experience you need (optional)',
+                   'rows': 3, 'cols': 40}))
     education = forms.CharField(
         required=False,
         widget=forms.Textarea(
-            attrs={'placeholder': 'Education level you are looking for (optional)'}))
+            attrs={'placeholder': 'Education level you are looking for (optional)',
+                   'rows': 3, 'cols': 40}))
     description = forms.CharField(
         required=True,
         widget=forms.Textarea(
-            attrs={'placeholder': 'Job Description'}))
+            attrs={'placeholder': 'Job Description',
+                   'rows': 3, 'cols': 40}))
     roles = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={'placeholder': 'Responsibilities' +\
-                   ' or Roles (must be comma separated)'}))
+                   ' or Roles (must be comma separated)',
+                   'rows': 3, 'cols': 40}))
     benefits = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={'placeholder': 'Benefits' +\
-                   ' (must be comma separated)'}))
+                   ' (must be comma separated)',
+                   'rows': 3, 'cols': 40}))
     qualifications = forms.CharField(
         required=True,
         widget=forms.Textarea(
@@ -97,18 +103,21 @@ class JobPostForm(forms.Form):
                 'placeholder': 'Qualifications or Requirements e.g.' +\
                 ' 2 years experience, Bachelors' +\
                 'Degree in Computer Science, etc.' +\
-                ' (must be comma separated)'}))
+                ' (must be comma separated)',
+                'rows': 3, 'cols': 40}))
 
-    How_to_apply = forms.CharField(
+    how_to_apply = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={'placeholder': 'How to apply'\
-                + ' (must be comma separated)'}))
+                + ' (must be comma separated)',
+                   'rows': 3, 'cols': 40}))
     cautions = forms.CharField(
         required=False,
         widget=forms.Textarea(
             attrs={'placeholder': 'any cautions or'\
-                + ' warnings (must be comma separated)'}))
+                + ' warnings (must be comma separated)',
+                   'rows': 3, 'cols': 40}))
 
     def __init__(self, *args, **kwargs):
         """This method initializes the form.
@@ -117,28 +126,7 @@ class JobPostForm(forms.Form):
             **kwargs: Arbitrary keyword arguments.
         """
         self.user = kwargs.pop('user', None)
-        self.instance = kwargs.pop('instance', None)
         super(JobPostForm, self).__init__(*args, **kwargs)
-
-        if self.instance:
-            self.fields['title'].initial = self.instance.title
-            self.fields['deadline'].initial = self.instance.deadline
-            self.fields['working_time'].initial = self.instance.working_time
-            self.fields['working_location'].initial = self.instance.working_location
-            self.fields['position'].initial = self.instance.position
-            self.fields['skills'].initial = self.instance.skills
-            self.fields['experience'].initial = self.instance.experience
-            self.fields['education'].initial = self.instance.education
-            self.fields['description'].initial = self.instance.description
-            self.fields['roles'].initial = self.instance.roles
-            self.fields['benefits'].initial = self.instance.benefits
-            self.fields['qualifications'].initial = self.instance.qualifications
-            self.fields['salary'].initial = self.instance.salary
-            self.fields['location'].initial = self.instance.location
-            self.fields['category'].initial = self.instance.category
-            self.fields['contacts'].initial = self.instance.contacts
-            self.fields['How_to_apply'].initial = self.instance.How_to_apply
-            self.fields['cautions'].initial = self.instance.cautions
 
     def clean(self):
         """This method cleans the form.
@@ -174,7 +162,7 @@ class JobPostForm(forms.Form):
             location=self.cleaned_data['location'],
             category=self.cleaned_data['category'],
             contacts=self.cleaned_data['contacts'],
-            How_to_apply=self.cleaned_data['How_to_apply'],
+            how_to_apply=self.cleaned_data['how_to_apply'],
             cautions=self.cleaned_data['cautions'],
         )
         job_post.save()

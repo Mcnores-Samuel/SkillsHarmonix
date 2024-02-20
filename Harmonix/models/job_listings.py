@@ -45,7 +45,7 @@ class JobListing(models.Model):
     location = models.CharField(max_length=255)
     category = models.CharField(max_length=50)
     contacts = models.CharField(max_length=255)
-    How_to_apply = models.TextField()
+    how_to_apply = models.TextField(null=True, blank=True)
     cautions = models.TextField()
 
     class Meta:

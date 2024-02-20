@@ -127,6 +127,44 @@
     font-size: 10px;
 }
 
+.apply-btn {
+    background-color: #1a2442;
+    color: white;
+}
+
+.apply-btn:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.search-btn {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #1a2442;
+    color: white;
+}
+
+.search-btn:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.search-input{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.card_holder {
+    height: 600px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.card_holder::-webkit-scrollbar {
+    display: none;
+}
+
 @media screen and (max-width: 50rem) {
     .wrapper  {
         position: relative;
@@ -222,5 +260,10 @@
 
     .wrapper.resize .sidebar ul li {
         padding: 5px 15px;
+    }
+
+    .post {
+        position: relative;
+        right: 0;
     }
 }

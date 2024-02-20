@@ -6,6 +6,7 @@ from ..models.job_listings import JobListing
 from ..models.business_profile import BusinessProfile
 from ..models.Job_application import JobApplication
 from django.shortcuts import redirect
+from ..forms.job_post_form import JobPostForm
 
 
 @login_required

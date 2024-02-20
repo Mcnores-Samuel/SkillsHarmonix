@@ -8,15 +8,24 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
         <link rel="stylesheet" href="{% static 'styles/base_header.css' %}">
         <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
         {% block head %}
         {% endblock %}
         <script src="{% static 'scripts/sidebar.js' %}" defer></script>
-        <script src="{% static 'scripts/placeholders.js' %}" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            .animated-section {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 1.7s ease, transform 1.7s ease;
+            }
+    
+            .animated-section.loaded {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
     </head>
     <body>
         <button class="scroll-back"><i class='bx bxs-up-arrow-square'></i></button>
@@ -91,7 +100,7 @@
         <section class="presentaion">
             {% block content %}
                 {% if messages %}
-                    <div class="messages">
+                    <div class="messages animated-section">
                         {% for message in messages %}
                             {% if message.tags == 'success' %}
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -120,11 +129,11 @@
             <div class="top-display d-flex position-relative bg-light">
                 <form action="" method="post" class="d-flex position-relative search-form">
                     {% csrf_token %}
-                    <input type="search" id="search_term" name="search_term" class="form-control me-2"
+                    <input type="search" id="search_term" name="search_term" class="form-control me-2 search-input"
                     placeholder="Search" arcreate_feedbackia-label="Search" aria-describedby="search-addon" />
-                    <button type="submit" class="btn btn-outline-light btn-primary search-btn">search</button>
+                    <button type="submit" class="btn apply-btn search-btn material-icons">search</button>
                 </form>
-                <a href="{% url 'create_job_post' %}" class="btn post btn-primary">Post</a>
+                <a href="{% url 'create_job_post' %}" class="btn post btn rounded-pill apply-btn">Post</a>
                 <div class="notify">
                     <div class="dropdown">
                         <button type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -197,24 +206,28 @@
             <br>
             <section class="">
                 <div class="row gy-3">
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-6 col-12 card_holder">
                         <div class="card">
                             <div class="card-header text-center">
-                                <h4>Recent Job Post</h4>
+                                <h4 class="fw-bold text-muted">Recent Job Post</h4>
                             </div>
                             <div class="card-body">
                                 {% for job in data %}
-                                <div class="card mb-3">
+                                <div class="card mb-3 animated-section">
                                     <div class="card-body">
-                                        <h5 class="card-title fw-bold">{{ job.title }}</h5>
-                                        <p class="card-text">{{ job.description }}</p>
+                                        <div class="card-header">
+                                            <h4 class="card-title fw-bold text-center text-muted">{{ job.title }}</h4>
+                                        </div>
+                                        <br>
+                                        <p><strong>Date Posted:</strong> <span class="fw-bold text-muted">{{ job.date_posted }}</span></p>
+                                        <p><strong>Deadline:</strong> <span class="fw-bold text-muted">{{ job.deadline }}</span></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                                 <!-- View Button -->
-                                                <button type="button" class="btn btn-primary me-2 w-25" data-bs-toggle="modal" data-bs-target="#viewJobModal{{ job.id }}">View</button>
+                                                <button type="button" class="btn apply-btn me-2 w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#viewJobModal{{ job.id }}">View</button>
                                                 <!-- Edit Button -->
-                                                <button type="button" class="btn btn-primary me-2 w-25" data-bs-toggle="modal" data-bs-target="#editJobModal{{ job.id }}">Edit</button>
+                                                <button type="button" class="btn apply-btn me-2 w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#editJobModal{{ job.id }}">Edit</button>
                                                 <!-- Delete Button -->
-                                                <button type="button" class="btn btn-danger w-25" data-bs-toggle="modal" data-bs-target="#deleteJobModal{{ job.id }}">Delete</button>
+                                                <button type="button" class="btn btn-danger w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteJobModal{{ job.id }}">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +245,6 @@
                                             <div class="modal-body">
                                                 <p><strong>Job Description:</strong> {{ job.description }}</p>
                                                 <p><strong>Location:</strong> {{ job.location }}</p>
-
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +259,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="" method="post">
+                                                <form action="{% url 'create_job_post' %}" method="post">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="job_id" value="{{ job.id }}">
                                                     <!-- Add input fields to edit job details -->
@@ -256,15 +268,74 @@
                                                         <input type="text" class="form-control" id="title" name="title" value="{{ job.title }}">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="description" class="form-label">Description</label>
-                                                        <textarea class="form-control" id="description" name="description" rows="3">{{ job.description }}</textarea>
+                                                        <label for="deadline" class="form-label">Deadline</label>
+                                                        <input type="date" class="form-control" name="deadline" id="deadline" value="{{ job.deadline }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="working_time" class="form-label">Working Time</label>
+                                                        <input type="text" class="form-control" name="working_time" id="working_time" value="{{ job.working_time }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="working_location" class="form-label">Work Location</label>
+                                                        <input type="text" class="form-control" name="working_location" id="working_location" value="{{ job.working_location }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="position" class="form-label">Position</label>
+                                                        <input type="text" class="form-control" name="position" id="position" value="{{ job.position }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="salary" class="form-label">Salary</label>
+                                                        <input type="text" class="form-control" name="salary" id="salary" value="{{ job.salary }}">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="location" class="form-label">Location</label>
                                                         <input type="text" class="form-control" id="location" name="location" value="{{ job.location }}">
                                                     </div>
-                                                    <!-- Add more input fields as needed -->
-                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                    <div class="mb-3">
+                                                        <label for="category" class="form-label">Category</label>
+                                                        <input type="text" class="form-control" name="category" id="category" value="{{ job.category }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="contacts" class="form-label">Contacts</label>
+                                                        <input type="text" class="form-control" name="contacts" id="contacts" value="{{ job.contacts }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="skills" class="form-label">Skills</label>
+                                                        <textarea class="form-control" name="skills" id="skills" rows="3">{{ job.skills }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="experience" class="form-label">Experience</label>
+                                                        <textarea class="form-control" name="experience" id="experience" rows="3">{{ job.experience }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="education" class="form-label">Education</label>
+                                                        <textarea class="form-control" name="education" id="education" rows="3">{{ job.education }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="description" class="form-label">Description</label>
+                                                        <textarea class="form-control" name="description" id="description" rows="3">{{ job.description }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="roles" class="form-label">Roles</label>
+                                                        <textarea class="form-control" name="roles" id="roles" rows="3">{{ job.roles }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="benefits" class="form-label">Benefits</label>
+                                                        <textarea class="form-control" name="benefits" id="benefits" rows="3">{{ job.benefits }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="qualifications" class="form-label">Qualifications</label>
+                                                        <textarea class="form-control" name="qualifications" id="qualifications" rows="3">{{ job.qualifications }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="how_to_apply" class="form-label">How To Apply</label>
+                                                        <textarea class="form-control" name="how_to_apply" id="how_to_apply" rows="3">{{ job.how_to_apply }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="cautions" class="form-label">Cautions</label>
+                                                        <textarea class="form-control" name="cautions" id="cautions" rows="3">{{ job.cautions }}</textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn apply-btn w-100 rounded-pill">Save Changes</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -281,10 +352,11 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete this job?</p>
-                                                <form action="" method="post">
+                                                <p>Please note that deleting this job post will also remove all associated job applications.</p>
+                                                <form action="{% url 'delete_job_list' %}" method="post">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="job_id" value="{{ job.id }}">
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger w-100 rounded-pill"> Yes Delete</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -294,20 +366,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-6 col-12 card_holder">
                         <div class="card">
                             <div class="card-header text-center">
-                                <h4>Recent Job Applications</h4>
+                                <h4 class="fw-bold text-muted">Recent Job Applications</h4>
                             </div>
                             <div class="card-body">
                                 {% for application in apps %}
-                                <div class="card mb-3">
+                                <div class="card mb-3 animated-section">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ application.job.title }}</h5>
-                                        <p class="card-text">{{ application.applicant.username }}</p>
+                                        <div class="card-header">
+                                            <h5 class="card-title fw-bold text-center text-muted">{{ application.job.title }}</h5>
+                                        </div>
+                                        <br>
+                                        <p><strong>Timestamp:</strong> {{ application.date_submitted }}</p>
+                                        {% if application.applicant %}
+                                            <p class="card-text"><strong>Applicant:</strong> {{ application.applicant.first_name }} {{ application.applicant.last_name }}</p>
+                                        {% else %}
+                                            <p class="card-text"><strong>Applicant:</strong> {{ application.first_name }} {{ application.last_name }}</p>
+                                        {% endif %}
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <button type="button" class="btn btn-primary me-2 w-25" data-bs-toggle="modal" data-bs-target="#viewAppModal{{ application.id }}">Review</button>
-                                            <button type="button" class="btn btn-danger w-25" data-bs-toggle="modal" data-bs-target="#deleteAppModal{{ application.id }}">Delete</button>
+                                            <button type="button" class="btn apply-btn me-2 w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#viewAppModal{{ application.id }}">Review</button>
+                                            <button type="button" class="btn btn-danger w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteAppModal{{ application.id }}">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -338,7 +418,23 @@
         
             {% endblock %}
         </section>
-        <div class="divider"></div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                const sections = document.querySelectorAll('.animated-section');
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('loaded');
+                        } else {
+                            entry.target.classList.remove('loaded');
+                        }
+                    });
+                });
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>
