@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'SkillsHarmonix.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('POSTGRES_URL')
 
 DATABASES = {
     'default': dj_database_url.config(
