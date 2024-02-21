@@ -6,7 +6,6 @@ from ..models.job_listings import JobListing
 from ..models.business_profile import BusinessProfile
 from ..models.Job_application import JobApplication
 from django.shortcuts import redirect
-from ..forms.job_post_form import JobPostForm
 
 
 @login_required
@@ -31,5 +30,6 @@ def dashboard(request):
             }
         return render(request, 'company_sites/dashboard.html', context)
     elif request.user.is_authenticated and request.user.user_type == 'Job seeker':
+        data = JobListing.objects.all().order_by('-date_posted')
         return render(request, 'jobseeker_sites/dashboard.html')
     return render(request, 'dashboard.html')
