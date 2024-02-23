@@ -8,131 +8,63 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
         <link rel="stylesheet" href="{% static 'styles/base_header.css' %}">
         <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
+        <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
         {% block head %}
         {% endblock %}
         <script src="{% static 'scripts/sidebar.js' %}" defer></script>
-        <script src="{% static 'scripts/placeholders.js' %}" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            .animated-section {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 1.7s ease, transform 1.7s ease;
+            }
+    
+            .animated-section.loaded {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
     </head>
     <body>
-        <button class="scroll-back"><i class='bx bxs-up-arrow-square'></i></button>
         <div class="row w-100">
             <div class="col-md-2 col-12">
                 <div class="topbar">
-                    <div class="logo custom-logo">SHX</div>
-                    <button class="btn d-md-none menu-btn menu" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-expanded="false" aria-controls="sidebarCollapse">
+                    <a class="navbar-brand fw-bold" href="/">SkillHarmonix</a>
+                    <button class="navbar-toggler menu" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse">
                         <span class="material-icons">
                             menu
                             </span>
                     </button>
                 </div>
                 <br>
-                <div class="collapse d-md-block wrapper" id="sidebarCollapse">
+                <div class="collapse navbar-collapse d-md-block wrapper" id="sidebarCollapse">
                     <div class="sidebar">
                         <div class="topbar-wrapper heading bg-success ">
-                            <div class="logo">SHX</div>
+                            <div class="logo">
+                                <span class="material-icons">
+                                    menu
+                                </span>
+                            </div>
                             <div class="text-center text-fs text-light brandname text">Skill Harmonix</div>
                         </div>
-                        <ul class="navbar-nav flex-column">
+                        <ul class="navbar-nav flex-column me-auto">
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center" href="{% url 'dashboard' %}"
-                                data-bs-toggle="tooltip" 
-                                title="analytics">
-                                <span class="material-icons">
-                                    analytics
-                                </span>
-                                <span class="text"> Analytics</span>
-                                </a>
-                            </li>
-                            {% if user.is_authenticated and user.is_superuser %}
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip" 
-                                title="Management">
-                                <span class="material-icons">
-                                    home
+                                data-bs-toggle="tooltip"
+                                title="Dashboard">
+                                    <span class="material-icons">
+                                        dashboard
                                     </span>
-                                    <span class="text"> Manage</span>
+                                    <span class="text"> Dashboard</span>
                                 </a>
                             </li>
-                            {% endif %}
+                        <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip"
-                                title="Stock">
-                                <span class="material-icons">
-                                    inventory
-                                </span>
-                                <span class="text"> Stock</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip"
-                                title="Sales">
-                                <span class="material-icons">
-                                outbound
-                                </span>
-                                <span class="text"> Sales</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip"
-                                title="Sales">
-                                <span class="material-icons">
-                                outbound
-                                </span>
-                                <span class="text"> Sales</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip"
-                                title="Commisions">
-                                <span class="material-icons">
-                                    wallet
-                                </span>
-                                <span class="text"> Commisions</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip"
-                                title="Transactions">
-                                <span class="material-icons">
-                                    paid
-                                </span>
-                                <span class="text"> Payments</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="#"
-                                data-bs-toggle="tooltip" 
-                                title="Defective Devices">
-                                <span class="material-icons">
-                                    report_problem
-                                </span>
-                                <span class="text"> Defects</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
-                                data-bs-toggle="tooltip" 
-                                title="Pending Actions">
-                                <span class="material-icons">
-                                    pending_actions
-                                </span>
-                                <span class="text"> Pending Sales</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
+                                <a class="nav-link d-flex align-items-center" href="{% url 'professional_profile' %}"
                                 data-bs-toggle="tooltip" 
                                 title="Profile">
                                     <span class="material-icons">
@@ -152,7 +84,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href=""
+                                <a class="nav-link d-flex align-items-center" href="{% url 'create_feedback' %}"
                                 data-bs-toggle="tooltip" 
                                 title="feedback">
                                     <span class="material-icons">
@@ -169,7 +101,7 @@
         <section class="presentaion">
             {% block content %}
                 {% if messages %}
-                    <div class="messages">
+                    <div class="messages animated-section">
                         {% for message in messages %}
                             {% if message.tags == 'success' %}
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -198,9 +130,9 @@
             <div class="top-display d-flex position-relative bg-light">
                 <form action="" method="post" class="d-flex position-relative search-form">
                     {% csrf_token %}
-                    <input type="search" id="search_term" name="search_term" class="form-control me-2"
-                    placeholder="Search IMEI number or Contract number" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="submit" class="btn btn-outline-light btn-primary search-btn">search</button>
+                    <input type="search" id="search_term" name="search_term" class="form-control me-2 search-input"
+                    placeholder="Search" arcreate_feedbackia-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn apply-btn search-btn material-icons">search</button>
                 </form>
                 <div class="notify">
                     <div class="dropdown">
@@ -240,7 +172,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{% url 'business_profile' %}">
                                     <div class="d-flex">
                                         <div class="icon">
                                             <span class="material-icons">
@@ -254,7 +186,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{% url 'log_out' %}">
                                     <div class="d-flex">
                                         <div class="icon">
                                             <span class="material-icons">
@@ -272,246 +204,174 @@
                 </div>
             </div>
             <br>
-            <section class="charts-and-data">
+            <div class="container animated-section">
+                <form action="" method="post" id="filter_form">
+                    {% csrf_token %}
+                    <div class="input-group mb-3 gap-5 d-flex justify-content-between">
+                        <div class="d-flex gap-2 align-items-center">
+                            <label for="location_ft" class="form-label fw-bold text-muted">Location</label>
+                            <input type="text" class="form-control rounded-pill" name="location" id="location_ft" placeholder="Location" list="locations">
+                            <datalist id="locations">
+                                {% for location in locations %}
+                                    <option value="{{ location }}">{{ location }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <label for="position_ft" class="form-label fw-bold text-muted">Position</label>
+                            <input type="text" class="form-control rounded-pill" name="position" id="position_ft" placeholder="Position" list="positions">
+                            <datalist id="positions">
+                                {% for position in pos %}
+                                    <option value="{{ position }}">{{ position }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <label for="category_ft" class="form-label fw-bold text-muted">Category</label>
+                            <input type="text" class="form-control rounded-pill" name="category" id="category_ft" placeholder="Category" list="categories">
+                            <datalist id="categories">
+                                {% for category in categories %}
+                                    <option value="{{ category }}">{{ category }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <section class="">
                 <div class="row gy-3">
-                    <div class="col-md-3 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="icon">
-                                        <span class="material-icons">
-                                            inventory
-                                        </span>
+                    <div class="col-md-8 col-12 card_holder">
+                        <br>
+                            <h5 class="fw-bold text-muted animated-section text-center">Available Jobs</h5>
+                        <br>
+                        <div class="container">
+                            <div class="row gy-3">
+                                {% for job in data %}
+                                <div class="col-md-6">
+                                    <div class="card animated-section"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#viewJobModal{{ job.id }}">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                {% if job.company.logo.url %}
+                                                    <img src="{{ job.company.logo.url }}" alt="{{ job.company.business_name }}" class="img-fluid logo_img">
+                                                {% else %}
+                                                    <span class="material-icons">
+                                                        business
+                                                    </span>
+                                                {% endif %}
+                                                <h6 class="card-subtitle mb-2 text-muted fw-bold">{{ job.company.business_name }}</h6>
+                                            </div>
+                                            <br>
+                                            <h5 class="card-title">{{ job.title }}</h5>
+                                            <p><strong>Location:</strong> {{ job.location }}</p>
+                                            <p class="text-muted fw-bold">{{ job.working_time }}</p>
+                                            <p class="text-muted fw-bold">{{ job.working_location }}</p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
+                                                    Apply
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="">
-                                        <p>Overall Stock</p>
-                                        <p></p>
+        
+                                    <div class="modal fade" id="viewJobModal{{ job.id }}" tabindex="-1" aria-labelledby="viewJobModalLabel{{ job.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="container d-inline-flex gap-3 align-items-center">
+                                                        {% if job.company.logo.url %}
+                                                            <img src="{{ job.company.logo.url }}" alt="{{ job.company.business_name }}" class="img-fluid logo_img">
+                                                        {% else %}
+                                                            <span class="material-icons">
+                                                                business
+                                                            </span>
+                                                        {% endif %}
+                                                         <h5 class="modal-title fw-bold mb-2 text-muted fw-bold" id="viewJobModalLabel{{ job.id }}">{{ job.company.business_name }}</h5>
+                                                    </div>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="text-center fw-bold" id="viewJobModalLabel{{ job.id }}">{{ job.title }}</h5>
+                                                    <p><strong>Posted On:</strong> {{ job.date_posted }}</p>
+                                                    <p><strong>Deadline:</strong> {{ job.deadline }}</p>
+                                                    <p><strong>Working Time:</strong> {{ job.working_time }}</p>
+                                                    <p><strong>Working Location:</strong> {{ job.working_location }}</p>
+                                                    <p><strong>Position:</strong> {{ job.position }}</p>
+                                                    <p><strong>Salary:</strong> {{ job.salary }}</p>
+                                                    <p><strong>Location:</strong> {{ job.location }}</p>
+                                                    <p><strong>Job Description:</strong> {{ job.description }}</p>
+                                                    <p><strong>Your Roles:</strong> {{ job.roles }}</p>
+                                                    <p><strong>Skills:</strong> {{ job.skills }}</p>
+                                                    <p><strong>Qualifications:</strong> {{ job.qualifications }}</p>
+                                                    <p><strong>Experience:</strong> {{ job.experience }}</p>
+                                                    <p><strong>Education:</strong> {{ job.education }}</p>
+                                                    <p><strong>Benefits:</strong> {{ job.benefits }}</p>
+                                                    <p><strong>Contacts:</strong> {{ job.contacts }}</p>
+                                                    <p><strong>How to apply:</strong> {{ job.how_to_apply }}</p>
+                                                    <p><strong>cautions:</strong> {{ job.cautions }}</p>
+        
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
+                                                            Apply
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-4 col-12 card_holder">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="material-icons">
-                                        credit_score
-                                    </span>
-                                    <div class="">
-                                        <p>Overall Sales</p>
-                                        <p></p>
-                                    </div>
-                                </div>
+                            <div class="card-header text-center">
+                                <h4 class="fw-bold text-muted">Job matching your Profile</h4>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <div class="card">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="icon ">
-                                        <span class="material-icons">
-                                            outbound
-                                        </span>
-                                    </div>
-                                    <div class="">
-                                        <p>Main Shop Monthly Sales</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="">
-                                    <p>Main shop target</p>
-                                    <div class="">
-                                        <div class="text-end">{{ target }} Devices</div>
-                                        {% if progress < 50 %}
-                                        <div class="progress">
-                                            <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ terget }}">{{ progress }}%</div>
-                                        </div>
-                                        {% elif progress > 50 and progress < 100 %}
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ target }}">{{ progress }}%</div>
-                                        </div>
-                                        {% elif progress == 100 %}
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ terget }}">{{ progress }}%</div>
-                                        </div>
-                                        {% elif progress > 100 %}
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                            role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                            aria-valuemax="{{ terget }}" style="background-color: purple;">{{ progress }}%</div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Daily Sales on loan</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="daily_sales_loader_loan"></div>
-                                <canvas class="daily_sales_chart_loan" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Daily Sales on Cash</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="daily_sales_loader_cash"></div>
-                                <canvas class="daily_sales_chart_cash" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Weekly Sales on loan</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="weekly_sales_loader_loan"></div>
-                                <canvas class="Weekly_sales_chart_loan" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Weekly Sales on Cash</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="weekly_sales_loader_cash"></div>
-                                <canvas class="Weekly_sales_chart_cash" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Monthly Sales on loan</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="agent_sales_loan_chart_loader"></div>
-                                <canvas class="agent_sales_loan_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Monthly Sales on Cash</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="agent_sales_cash_chart_loader"></div>
-                                <canvas class="agent_sales_cash_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="charts_by_chartjs">
-                <div class="row gy-3">
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Agent Overall Stock</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="loading-message-stock"></div>
-                                <canvas class="all_agents_stock_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Main Shop Stock</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="loading-message-shop"></div>
-                                <canvas class="main_stock_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="yearly_analysis">
-                <div class="row">
-                    <div class="col-md-6 col-12 w-100">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Yearly Sales</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="yearly_sales_chart_loader"></div>
-                                <canvas class="yearly_sales_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br>
-            <section class="yearly_analysis">
-                <div class="row">
-                    <div class="col-md-6 col-12 w-100">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h4>Product analytics</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="yearly_product_sales_chart_loader"></div>
-                                <canvas class="yearly_product_sales_chart" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        
             {% endblock %}
         </section>
-        <div class="divider"></div>
-        <footer>
-            {% block footer %}
-            <div>
-                <p>&copy; 2023 Hafeez Enterprise. All rights reserved.</p>
-            </div>
-            {% endblock %}
-        </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                const sections = document.querySelectorAll('.animated-section');
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('loaded');
+                        } else {
+                            entry.target.classList.remove('loaded');
+                        }
+                    });
+                });
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            });
+
+            const filter_form = $('#filter_form');
+            const location_ft = $('#location_ft');
+            const position_ft = $('#position_ft');
+            const category_ft = $('#category_ft');
+            category_ft.on('change', () => {
+                filter_form.submit();
+            });
+
+            position_ft.on('change', () => {
+                filter_form.submit();
+            });
+
+            location_ft.on('change', () => {
+                filter_form.submit();
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

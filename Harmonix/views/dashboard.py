@@ -4,8 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from ..models.job_listings import JobListing
 from ..models.business_profile import BusinessProfile
+from ..models.professional_profile import ProfessionalProfile
 from ..models.Job_application import JobApplication
 from django.shortcuts import redirect
+from django.contrib import messages
 
 
 @login_required
@@ -31,5 +33,20 @@ def dashboard(request):
         return render(request, 'company_sites/dashboard.html', context)
     elif request.user.is_authenticated and request.user.user_type == 'Job seeker':
         data = JobListing.objects.all().order_by('-date_posted')
-        return render(request, 'jobseeker_sites/dashboard.html')
+        recommended = []
+        try:
+            user = request.user
+            professional = ProfessionalProfile.objects.get(jobseeker=user)
+            skills = professional.skills.split(',')
+            recommended = JobListing.objects.filter(
+                skills__in=skills
+            ).order_by('-date_posted')
+        except AttributeError:
+            messages.info(request, 'Please create a professional profile to view recommended jobs')
+            return redirect('professional_profile')
+        context = {
+            'data': data,
+            'recommended': recommended
+        }
+        return render(request, 'jobseeker_sites/dashboard.html', context)
     return render(request, 'dashboard.html')

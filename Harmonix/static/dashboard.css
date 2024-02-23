@@ -16,10 +16,6 @@ footer {
 .intro {
     background-color: #1a2442;
 }
-.material-icons {
-    font-size: 2rem;
-    color: #6c757d;
-}
 
 .logo_img {
     width: 30px;
@@ -32,6 +28,7 @@ footer {
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    height: 450px;
 }
 
 .search-container {
@@ -80,6 +77,22 @@ footer {
 .modal-size {
     width: 75%;
 }
+
+.style-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure that the card body takes the full height of the parent */
+}
+
+.card-content {
+    flex: 1; /* Make the content of the card take up all available space */
+}
+
 
 
 @media screen and (max-width: 50rem) {

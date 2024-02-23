@@ -111,7 +111,26 @@ class ProfessionalProfileForm(forms.Form):
             **kwargs: Arbitrary keyword arguments.
         """
         self.user = kwargs.pop('user', None)
+        self.professional = kwargs.pop('instance', None)
         super().__init__(*args, **kwargs)
+        if self.professional:
+            self.fields['first_name'].initial = self.professional.first_name
+            self.fields['last_name'].initial = self.professional.last_name
+            self.fields['address'].initial = self.professional.address
+            self.fields['city'].initial = self.professional.city
+            self.fields['state'].initial = self.professional.state
+            self.fields['country'].initial = self.professional.country
+            self.fields['zipcode'].initial = self.professional.zipcode
+            self.fields['phone'].initial = self.professional.phone
+            self.fields['email'].initial = self.professional.email
+            self.fields['skills'].initial = self.professional.skills
+            self.fields['bio'].initial = self.professional.bio
+            self.fields['experience'].initial = self.professional.experience
+            self.fields['education'].initial = self.professional.education
+            self.fields['resume'].initial = self.professional.resume
+            self.fields['portfolio'].initial = self.professional.portfolio
+            self.fields['preferences'].initial = self.professional.preferences
+            self.fields['avatar'].initial = self.professional.avatar
 
     def clean(self):
         """This method cleans the form.

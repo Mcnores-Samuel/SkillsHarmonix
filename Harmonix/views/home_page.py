@@ -3,6 +3,7 @@ from django.contrib import messages
 from ..models.job_listings import JobListing
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from .search_engine import search_engine
 
 
 def home_page(request):
@@ -14,24 +15,7 @@ def home_page(request):
     locations = set(JobListing.objects.values_list('location', flat=True).distinct())
 
     if request.method == 'POST':
-        query = request.POST.get('search_query')
-        location = request.POST.get('location')
-        category = request.POST.get('category')
-        position = request.POST.get('position')
-        if query:
-            data = data.filter(
-                Q(title__icontains=query) |
-                Q(position__icontains=query) |
-                Q(roles__icontains=query) |
-                Q(location__icontains=query) |
-                Q(category__icontains=query)
-            ).distinct()
-        if location:
-            data = data.filter(location=location)
-        if category:
-            data = data.filter(category=category)
-        if position:
-            data = data.filter(position=position)
+        data = search_engine(request)
     
     paginator = Paginator(data, 12)
     page = request.GET.get('page')
