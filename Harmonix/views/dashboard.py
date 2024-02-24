@@ -61,4 +61,6 @@ def dashboard(request):
             'locations': locations
         }
         return render(request, 'jobseeker_sites/dashboard.html', context)
+    elif request.user.is_authenticated and request.user.is_superuser and request.user.is_staff:
+        return redirect('/admin/')
     return render(request, 'dashboard.html')
