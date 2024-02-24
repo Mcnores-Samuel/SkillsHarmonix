@@ -331,6 +331,21 @@
                                 <h4 class="fw-bold text-muted">Job matching your Profile</h4>
                             </div>
                             <div class="card-body">
+                                {% for job in recomended %}
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ job.title }}</h5>
+                                            <p><strong>Location:</strong> {{ job.location }}</p>
+                                            <p class="text-muted">{{ job.working_time }}</p>
+                                            <p class="text-muted">{{ job.working_location }}</p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
+                                                    Apply
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = (bool(int(os.environ.get('DEBUG', 1))))
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.railway.app', 'localhost', '.vercel.app', '127.0.0.1']
 
 
 # Application definition
