@@ -18,99 +18,106 @@ class BusinessProfileForm(forms.Form):
     logo = forms.ImageField(
         required=False,
         widget=forms.FileInput(
-            attrs={'class': 'form-control'}
+            attrs={'class': 'form-control animated-section',
+                   'id': 'logo', 'hidden': 'true'}
             ))
     cover_photo = forms.ImageField(
         required=False,
-        widget=forms.FileInput(attrs={'class': 'form-control'}))
+        widget=forms.FileInput(attrs={'class': 'form-control animated-section'}))
     business_name = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Enter Business Name',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     category = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'e.g. Restaurant, Hotel, etc',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     address = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Address(Street)',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     city = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'City you are located in',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     state = forms.CharField(
         max_length=100,
         required=False,
         widget=forms.TextInput(
             attrs={'placeholder': 'State you are located in',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     country = forms.CharField(
         max_length=100,
         required=False,
         widget=forms.TextInput(
             attrs={'placeholder': 'Country you are located in',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     zipcode = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Zipcode',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     phone = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Phone Number',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     email = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(
             attrs={'placeholder': 'Email Address',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     website = forms.CharField(
         max_length=100,
         required=False,
         widget=forms.TextInput(
             attrs={'placeholder': 'Website url',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
     registration_number = forms.CharField(
         max_length=100,
         required=False,
         widget=forms.TextInput(
             attrs={'placeholder': 'Registration Number',
-            'class': 'form-control'})
+            'class': 'form-control animated-section'})
             )
-    business_certificate = forms.FileField(required=False)
+    business_certificate = forms.FileField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={'class': 'form-control animated-section',
+                   'help_text': 'Upload your business certificate (optional)'}))
     description = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={'placeholder': 'Please describe your business',
-                   'class': 'form-control'}))
+                   'class': 'form-control animated-section',
+                   'rows': 3}))
     history = forms.CharField(
         required=True,
         widget=forms.Textarea(
             attrs={'placeholder': 'Please describe your business history',
-                   'class': 'form-control'}))
+                   'class': 'form-control animated-section',
+                   'rows': 3,}))
     
     def __init__(self, *args, **kwargs):
         """This method initializes the form.

@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+{% block container %}
+<br>
+<section class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">Confirm Email</h1>
+        </div>
+        <div class="card-body">
+            <p class="text-center">Please confirm your email address to complete the registration.</p>
+            <p class="text-center">If you have not received the email, click the button below to resend the confirmation email.</p>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Resend Confirmation Email</button>
+            </form>
+        </div>
+        <div class="card-footer">
+            <p class="text-center">If you have already confirmed your email, click the button below to login.</p>
+            <a href="{% url 'log_in' %}" class="btn btn-primary">Login</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

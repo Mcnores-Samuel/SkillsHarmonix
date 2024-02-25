@@ -31,7 +31,7 @@ def business_profile(request):
                 form = BusinessProfileForm(instance=business, user=user)
                 return redirect('business_profile')
         else:
-            messages.error(request, form.errors)
+            messages.error(request, 'Please make sure all fields are filled correctly.')
     else:
         user = request.user
         business = BusinessProfile.objects.filter(representative=user).first()

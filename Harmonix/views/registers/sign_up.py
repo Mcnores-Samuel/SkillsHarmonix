@@ -26,11 +26,9 @@ def sign_up(request):
             send_email(user)
             user.save()
             messages.success(request, 'Account created successfully')
-            return render(request, 'registers/confirm_email.html', {'user': user})
+            return render(request, 'authentication/confirm_email.html', {'user': user})
         else:
             messages.error(request, 'Account creation failed')
-            messages.error(request, form.errors)
             return render(request, 'registers/sign_up.html', {'form': form})
-    else:
-        form = SignUpForm()
-        return render(request, 'registers/sign_up.html', {'form': form})
+    form = SignUpForm()
+    return render(request, 'registers/sign_up.html', {'form': form})
