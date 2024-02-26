@@ -5,12 +5,12 @@ body {
 }
 
 main {
-    flex: 1; /* Grow and fill remaining space */
+    flex: 1;
 }
 
 
 footer {
-    margin-top: auto; /* Push footer to the bottom */
+    margin-top: auto;
 }
 
 .intro {
@@ -80,18 +80,6 @@ footer {
     display: flex;
     flex-direction: column;
 }
-
-.card-body {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Ensure that the card body takes the full height of the parent */
-}
-
-.card-content {
-    flex: 1; /* Make the content of the card take up all available space */
-}
-
-
 
 @media screen and (max-width: 50rem) {
     .search-container {

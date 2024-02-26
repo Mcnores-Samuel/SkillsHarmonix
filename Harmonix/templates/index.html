@@ -11,6 +11,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/job_listing.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/navigation.css' %}">
         <title>{% block title %}SkillsHarmonix{% endblock %}</title>
         <style>
             .animated-section {
@@ -27,22 +29,22 @@
     </head>
     <body>
         {% block navbar %}
-        <nav class="navbar navbar-expand-sm navbar-primary bg-light">
+        <nav class="navbar navbar-expand-sm navbar-primary">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="/">SkillHarmonix</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                    <span class="navbar-toggler-icon material-icons">menu</span>
+                <a class="navbar-brand text-white fw-bold" href="/">SkillHarmonix</a>
+                <button class="toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon text-white material-icons">menu</span>
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home_page' %}">Home</a>
+                            <a class="nav-link text-white" href="{% url 'home_page' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'log_in' %}">Login</a>
+                            <a class="nav-link text-white" href="{% url 'log_in' %}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sign_up' %}">Sign up</a>
+                            <a class="nav-link text-white" href="{% url 'sign_up' %}">Sign up</a>
                         </li>
                     </ul>
                 </div>
