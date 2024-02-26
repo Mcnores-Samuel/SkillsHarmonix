@@ -7,6 +7,9 @@
 {% bootstrap_javascript %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+    <style>
+
+    </style>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -14,15 +17,14 @@
     <div class="container animated-section">
         {% bootstrap_messages %}
     </div>
-    <h1 class="text-center">My Business Profile</h1>
+    <h1 class="text-center fw-bold text-muted animated-section">My Business Profile</h1>
 </div>
 <br>
-<img src="{{ form.logo.url }}" alt="" >
 <div class="container shadow-lg p-3 mb-5 bg-body rounded">
     {% if not business %}
-    <p class="text-center bg-warning">You have not created a business profile yet. Please fill out the form below to create a business profile.</p>
+    <p class="text-center text-warning">You have not created a business profile yet. Please fill out the form below to create a business profile.</p>
     {% else %}
-    <p class="text-center bg-success">You have already created a business profile. You can update your business profile by filling out the form below.</p>
+    <p class="text-center text-success">You have already created a business profile. You can update your business profile by filling out the form below.</p>
     {% endif %}
     <form action="" method="post" enctype="multipart/form-data" id="uploadForm" class="animated-section">
         {% csrf_token %}
@@ -42,26 +44,32 @@
                 </div>
             </div>
         <div class="container">
-            {{ form.cover_photo|as_crispy_field }}
-            {{ form.business_name|as_crispy_field }}
-            {{ form.category|as_crispy_field }}
-            {{ form.address|as_crispy_field }}
-            {{ form.city|as_crispy_field }}
-            {{ form.state|as_crispy_field }}
-            {{ form.country|as_crispy_field }}
-            {{ form.zipcode|as_crispy_field }}
-            {{ form.phone|as_crispy_field }}
-            {{ form.email|as_crispy_field }}
-            {{ form.website|as_crispy_field }}
-            {{ form.registration_number|as_crispy_field }}
-            {{ form.business_certificate|as_crispy_field }}
-            {{ form.description|as_crispy_field }}
-            {{ form.history|as_crispy_field }}
-        {% if business %}
-        <button type="submit" class="btn btn-primary">update</button>
-        {% else %}
-        <button type="submit" class="btn btn-primary">create profile</button>
-        {% endif %}
+            <div class="card">
+                <div class="card-body">
+                    {{ form.cover_photo|as_crispy_field }}
+                    {{ form.business_name|as_crispy_field }}
+                    {{ form.category|as_crispy_field }}
+                    {{ form.address|as_crispy_field }}
+                    {{ form.city|as_crispy_field }}
+                    {{ form.state|as_crispy_field }}
+                    {{ form.country|as_crispy_field }}
+                    {{ form.zipcode|as_crispy_field }}
+                    {{ form.phone|as_crispy_field }}
+                    {{ form.email|as_crispy_field }}
+                    {{ form.website|as_crispy_field }}
+                    {{ form.registration_number|as_crispy_field }}
+                    {{ form.business_certificate|as_crispy_field }}
+                    {{ form.description|as_crispy_field }}
+                    {{ form.history|as_crispy_field }}
+                </div>
+                <div class="card-footer">
+                    {% if business %}
+                        <button type="submit" class="btn apply-btn">update</button>
+                    {% else %}
+                        <button type="submit" class="btn apply-btn">create profile</button>
+                    {% endif %}
+                </div>
+            </div>
     </form>
 </div>
 <script>

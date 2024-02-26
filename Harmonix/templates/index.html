@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'dashboard.css' %}">
         <link rel="stylesheet" href="{% static 'styles/common.css' %}">
-        <title>{% block title %}SkillHarmonix{% endblock %}</title>
+        <title>{% block title %}SkillsHarmonix{% endblock %}</title>
         <style>
             .animated-section {
                 opacity: 0;
@@ -136,7 +136,7 @@
                     <div class="row gy-3">
                         {% for job in data %}
                         <div class="col-md-4">
-                            <div class="card style-card animated-section"
+                            <div class="card style-card animated-section h-100"
                             data-bs-toggle="modal"
                             data-bs-target="#viewJobModal{{ job.id }}">
                                 <div class="card-body">
@@ -155,11 +155,11 @@
                                     <p><strong>Location:</strong> {{ job.location }}</p>
                                     <p class="text-muted fw-bold">{{ job.working_time }}</p>
                                     <p class="text-muted fw-bold">{{ job.working_location }}</p>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
-                                            Apply
-                                        </a>
-                                    </div>
+                                </div>
+                                <div class="card-footer border-0 bg-white">
+                                    <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
+                                        Apply
+                                    </a>
                                 </div>
                             </div>
 

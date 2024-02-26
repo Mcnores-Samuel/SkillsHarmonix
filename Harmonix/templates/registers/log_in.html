@@ -14,11 +14,11 @@
     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" alt="SHX Logo" class="img-fluid">
     </div>
     <div class="w-50">
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center fw-bold text-muted">Log in</h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy}}
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn apply-btn">Login</button>
     </form>
     </div>
   </div>

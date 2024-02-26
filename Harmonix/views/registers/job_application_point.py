@@ -30,5 +30,8 @@ def job_application_point(request, job_id):
             messages.error(request, form.errors)
     else:
         form = JobApplicationForm()
+    if request.user.is_authenticated and request.user.user_type == 'Job seeker':
+        return render(request, 'jobseeker_sites/job_application.html',
+                      {'form': form, "user": request.user})
     return render(request, 'registers/job_application.html',
                   {'form': form, "user": request.user})

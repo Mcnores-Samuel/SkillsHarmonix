@@ -155,7 +155,7 @@
 }
 
 .card_holder {
-    height: 600px;
+    height: 400px;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;

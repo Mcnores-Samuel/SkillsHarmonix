@@ -36,7 +36,10 @@ def log_in(request):
                 else:
                     return redirect('home_page')
             else:
-                messages.error(request, 'Invalid email or password')
+                if not request.user.is_active:
+                    messages.error(request, 'Your account is not active, please check your email for the activation link')
+                else:
+                    messages.error(request, 'Invalid email or password')
     else:
         form = LogInForm()
     return render(request, 'registers/log_in.html', {'form': form, "user": request.user})

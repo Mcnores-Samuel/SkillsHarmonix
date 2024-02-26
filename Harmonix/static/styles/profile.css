@@ -127,7 +127,6 @@ button:active {
 }
 
 .image-section {
-	background-color: #9fa5aa;
 	padding: 10px;
 	border-top-right-radius: 8px;
 	border-top-left-radius: 8px;
@@ -152,6 +151,10 @@ button:active {
 	}
 
 	.controls .profile-btn {
+		width: 100%;
+	}
+
+	.btn {
 		width: 100%;
 	}
 }

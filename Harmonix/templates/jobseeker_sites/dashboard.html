@@ -130,8 +130,8 @@
             <div class="top-display d-flex position-relative bg-light">
                 <form action="" method="post" class="d-flex position-relative search-form">
                     {% csrf_token %}
-                    <input type="search" id="search_term" name="search_term" class="form-control me-2 search-input"
-                    placeholder="Search" arcreate_feedbackia-label="Search" aria-describedby="search-addon" />
+                    <input type="search" name="search_query" id="search_query" placeholder="Search for the job that match your skills"
+                    class="form-control me-2 search-input" arcreate_feedbackia-label="Search" aria-describedby="search-addon" />
                     <button type="submit" class="btn apply-btn search-btn material-icons">search</button>
                 </form>
                 <div class="notify">
@@ -172,7 +172,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="{% url 'business_profile' %}">
+                                <a class="dropdown-item" href="{% url 'professional_profile' %}">
                                     <div class="d-flex">
                                         <div class="icon">
                                             <span class="material-icons">
@@ -240,7 +240,7 @@
             </div>
             <section class="">
                 <div class="row gy-3">
-                    <div class="col-md-8 col-12 card_holder">
+                    <div class="col-md-8 col-12 card_holder all-data-card">
                         <br>
                             <h5 class="fw-bold text-muted animated-section text-center">Available Jobs</h5>
                         <br>
@@ -248,7 +248,7 @@
                             <div class="row gy-3">
                                 {% for job in data %}
                                 <div class="col-md-6">
-                                    <div class="card animated-section"
+                                    <div class="card animated-section h-100"
                                     data-bs-toggle="modal"
                                     data-bs-target="#viewJobModal{{ job.id }}">
                                         <div class="card-body">
@@ -263,15 +263,15 @@
                                                 <h6 class="card-subtitle mb-2 text-muted fw-bold">{{ job.company.business_name }}</h6>
                                             </div>
                                             <br>
-                                            <h5 class="card-title">{{ job.title }}</h5>
+                                            <h5 class="card-title fw-bold fs-6 text-muted">{{ job.title }}</h5>
                                             <p><strong>Location:</strong> {{ job.location }}</p>
                                             <p class="text-muted fw-bold">{{ job.working_time }}</p>
                                             <p class="text-muted fw-bold">{{ job.working_location }}</p>
-                                            <div class="d-flex justify-content-center">
-                                                <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
-                                                    Apply
-                                                </a>
-                                            </div>
+                                        </div>
+                                        <div class="card-footer border-0 bg-white">
+                                            <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
+                                                Apply
+                                            </a>
                                         </div>
                                     </div>
         
@@ -328,16 +328,15 @@
                     <div class="col-md-4 col-12 card_holder">
                         <div class="card">
                             <div class="card-header text-center">
-                                <h4 class="fw-bold text-muted">Job matching your Profile</h4>
+                                <h4 class="fw-bold text-muted fs-5">Job matching your Profile</h4>
                             </div>
                             <div class="card-body">
-                                {% for job in recomended %}
-                                    <div class="card">
+                                {% for job in recommended %}
+                                    <div class="card" data-bs-toggle="modal"
+                                    data-bs-target="#viewJobModal{{ job.id }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ job.title }}</h5>
+                                            <h5 class="card-title fs-6 fw-bold text-muted">{{ job.title }}</h5>
                                             <p><strong>Location:</strong> {{ job.location }}</p>
-                                            <p class="text-muted">{{ job.working_time }}</p>
-                                            <p class="text-muted">{{ job.working_location }}</p>
                                             <div class="d-flex justify-content-center">
                                                 <a href="{% url 'job_application_point' job_id=job.id %}" class="btn apply-btn w-100 rounded-pill">
                                                     Apply
@@ -345,6 +344,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
                                 {% endfor %}
                             </div>
                         </div>

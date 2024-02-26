@@ -22,87 +22,92 @@ class ProfessionalProfileForm(forms.Form):
         required=False,
         widget=forms.FileInput(
             attrs={'placeholder': 'Avatar',
-                   'class': 'form-control'}))
+                   'class': 'form-control animated-section'}))
     first_name = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'First Name', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     last_name = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'Last Name', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     address = forms.CharField(
         max_length=255,
         widget=forms.TextInput(
             attrs={'placeholder': 'Address', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     city = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'City', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     state = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'state', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     country = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'Country', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     zipcode = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'Zipcode', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     phone = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
             attrs={'placeholder': 'Phone Number', 
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     email = forms.CharField(
         max_length=100,
         widget=forms.TextInput(
             attrs={'placeholder': 'Email',
-                   'class': 'form-control'}))
+                   'class': 'form-control animated-section'}))
     resume = forms.FileField(
         required=False,
         widget=forms.FileInput(
             attrs={'placeholder': 'Resume',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     portfolio = forms.CharField(
         required=False,
         widget=forms.TextInput(
             attrs={'placeholder': 'Portfolio url',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section'}))
     skills = forms.CharField(
         required=False,
         widget=forms.Textarea(
             attrs={'placeholder': 'Skills e.g. programming, design, etc',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section',
+            'rows': 3, 'cols': 20, 'style': 'resize:none;'}))
     bio = forms.CharField(
         required=False,
         widget=forms.Textarea(
             attrs={'placeholder': 'Describe yourself',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section',
+            'rows': 5, 'cols': 20, 'style': 'resize:none;'}))
     experience = forms.CharField(
         required=False,
         widget=forms.Textarea(
             attrs={'placeholder': 'Describe your experience',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section',
+            'rows': 5, 'cols': 20, 'style': 'resize:none;'}))
     education = forms.CharField(
         required=False,
         widget=forms.Textarea(
             attrs={'placeholder': 'Describe your education',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section',
+            'rows': 5, 'cols': 20, 'style': 'resize:none;'}))
     preferences = forms.CharField(
         required=False,
         widget=forms.Textarea(
             attrs={'placeholder': 'Preferences e.g. full-time, part-time, etc',
-            'class': 'form-control'}))
+            'class': 'form-control animated-section',
+            'rows': 3, 'cols': 20, 'style': 'resize:none;'}))
     
     def __init__(self, *args, **kwargs):
         """This method initializes the form.

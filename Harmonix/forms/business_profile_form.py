@@ -19,7 +19,7 @@ class BusinessProfileForm(forms.Form):
         required=False,
         widget=forms.FileInput(
             attrs={'class': 'form-control animated-section',
-                   'id': 'logo', 'hidden': 'true'}
+                   'id': 'logo'}
             ))
     cover_photo = forms.ImageField(
         required=False,

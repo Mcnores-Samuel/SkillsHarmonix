@@ -1,0 +1,101 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Grow and fill remaining space */
+}
+
+
+footer {
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+.intro {
+    background-color: #1a2442;
+}
+
+.logo_img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.style-card {
+    padding: 1rem;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.search-container {
+    width: 50%;
+}
+
+.search-input{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.search-btn {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #1a2442;
+    color: white;
+}
+
+.search-btn:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.apply-btn {
+    background-color: #1a2442;
+    color: white;
+}
+
+.apply-btn:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.post-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+}
+
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.modal-size {
+    width: 75%;
+}
+
+.style-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure that the card body takes the full height of the parent */
+}
+
+.card-content {
+    flex: 1; /* Make the content of the card take up all available space */
+}
+
+
+
+@media screen and (max-width: 50rem) {
+    .search-container {
+        width: 100%;
+    }
+    
+}

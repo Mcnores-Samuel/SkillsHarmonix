@@ -56,7 +56,8 @@ class JobApplicationForm(forms.Form):
     cover_letter = forms.CharField(
         widget=forms.Textarea(
             attrs={'class': 'form-control',
-                   "placeholder": "Write your cover letter here."})
+                   "placeholder": "Write your cover letter here.",
+                   "rows": 5, "cols": 20, "style": "resize:none;"})
             )
     phone = forms.CharField(
         required=True,
