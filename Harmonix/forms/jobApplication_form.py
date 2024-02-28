@@ -1,6 +1,7 @@
 from ..models.Job_application import JobApplication
 from ..models.job_listings import JobListing
 from ..models.users import HarmonixUser
+from ..models.professional_profile import ProfessionalProfile
 from django import forms
 from django.utils import timezone
 
@@ -96,8 +97,8 @@ class JobApplicationForm(forms.Form):
         except JobApplication.DoesNotExist:
             pass
         
-        if user and user.is_authenticated and user.is_active and user.is_professional:
-            user = HarmonixUser.objects.get(id=user.id)
+        if user and user.is_authenticated and user.is_active and user.user_type == 'Job seeker':
+            user = ProfessionalProfile.objects.get(jobseeker=user)
             job_application = JobApplication(
                 date_submitted=timezone.now(),
                 applicant=user,

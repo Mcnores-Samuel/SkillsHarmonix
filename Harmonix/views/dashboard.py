@@ -21,17 +21,24 @@ def dashboard(request):
         try:
             business = BusinessProfile.objects.get(representative=user)
             apps = JobApplication.objects.filter(
-                job__company=business
+                job__company=business,
+                job__deadline__gte=current_date
             )
+            applicants_by_job = {}
+            for app in apps:
+                if app.job.title in applicants_by_job:
+                    applicants_by_job[app.job.title] += 1
+                else:
+                    applicants_by_job[app.job.title] = 1
             data = JobListing.objects.filter(
                 company=business,
-                date_posted__lte=current_date
+                deadline__gte=current_date
             )
         except BusinessProfile.DoesNotExist:
             return redirect('business_profile')
         context = {
                 'data': data,
-                'apps': apps
+                'applicants_by_job': applicants_by_job
             }
         return render(request, 'company_sites/dashboard.html', context)
     elif request.user.is_authenticated and request.user.user_type == 'Job seeker':

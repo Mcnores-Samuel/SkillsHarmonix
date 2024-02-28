@@ -10,6 +10,7 @@ from Harmonix.views.registers import (sign_up, log_in, log_out,
                               job_application_point, delete_ops)
 from Harmonix.views.general import job_listing
 from .views import dashboard
+from .views.company_sites import apps_preview
 
 
 urlpatterns = [
@@ -34,4 +35,5 @@ urlpatterns = [
      # Paths for the company sites in the Harmonix app.
      path('job_listings/', job_listing.job_listings, name='job_listings'),
      path('delete_job_list/', delete_ops.delete_job_list, name='delete_job_list'),
+     path('job_applications/', apps_preview.job_applications, name='job_applications')
 ]

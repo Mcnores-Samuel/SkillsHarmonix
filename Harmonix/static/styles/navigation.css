@@ -54,6 +54,13 @@
     background-color: #23435c;
 }
 
+.brand_name {
+    padding: 10px;
+    margin: 0;
+    width: auto;
+    font-family: cursive;
+}
+
 
 @media screen and (max-width: 50rem) {
     .navbar ul a {

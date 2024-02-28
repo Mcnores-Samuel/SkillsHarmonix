@@ -216,18 +216,18 @@
                                 <div class="card mb-3 animated-section">
                                     <div class="card-body">
                                         <div class="card-header">
-                                            <h4 class="card-title fw-bold text-center text-muted">{{ job.title }}</h4>
+                                            <h4 class="card-title fw-bold text-center text-muted fs-5">{{ job.title }}</h4>
                                         </div>
                                         <br>
                                         <p><strong>Date Posted:</strong> <span class="fw-bold text-muted">{{ job.date_posted }}</span></p>
                                         <p><strong>Deadline:</strong> <span class="fw-bold text-muted">{{ job.deadline }}</span></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                                 <!-- View Button -->
-                                                <button type="button" class="btn apply-btn me-2 w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#viewJobModal{{ job.id }}">View</button>
+                                                <button type="button" class="btn apply-btn me-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#viewJobModal{{ job.id }}">View</button>
                                                 <!-- Edit Button -->
-                                                <button type="button" class="btn apply-btn me-2 w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#editJobModal{{ job.id }}">Edit</button>
+                                                <button type="button" class="btn apply-btn me-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#editJobModal{{ job.id }}">Edit</button>
                                                 <!-- Delete Button -->
-                                                <button type="button" class="btn btn-danger w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteJobModal{{ job.id }}">Delete</button>
+                                                <button type="button" class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteJobModal{{ job.id }}">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -372,43 +372,11 @@
                                 <h4 class="fw-bold text-muted">Recent Job Applications</h4>
                             </div>
                             <div class="card-body">
-                                {% for application in apps %}
-                                <div class="card mb-3 animated-section">
-                                    <div class="card-body">
-                                        <div class="card-header">
-                                            <h5 class="card-title fw-bold text-center text-muted">{{ application.job.title }}</h5>
-                                        </div>
+                                {% for title, value in applicants_by_job.items %}
+                                    <a class="card mb-3 animated-section" href="{% url 'job_applications' %}">
+                                        <h5 class="card-header fw-bold text-center text-muted">{{ title }} <span class="badge bg-danger rounded-circle">{{ value }}</span></h5>
                                         <br>
-                                        <p><strong>Timestamp:</strong> {{ application.date_submitted }}</p>
-                                        {% if application.applicant %}
-                                            <p class="card-text"><strong>Applicant:</strong> {{ application.applicant.first_name }} {{ application.applicant.last_name }}</p>
-                                        {% else %}
-                                            <p class="card-text"><strong>Applicant:</strong> {{ application.first_name }} {{ application.last_name }}</p>
-                                        {% endif %}
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <button type="button" class="btn apply-btn me-2 w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#viewAppModal{{ application.id }}">Review</button>
-                                            <button type="button" class="btn btn-danger w-25 rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteAppModal{{ application.id }}">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <br>
-
-                                <!-- View Application Modal -->
-
-                                <div class="modal fade" id="viewAppModal{{ application.id }}" tabindex="-1" aria-labelledby="viewAppModalLabel{{ application.id }}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="viewAppModalLabel{{ application.id }}">{{ application.job.title }}</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </a>
                                 {% endfor %}
                             </div>
                         </div>
